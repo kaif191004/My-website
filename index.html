@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>fromroot – how the world’s big companies began and what they do</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F1F4EF; --surface:#FFFFFF; --ink:#13241E; --muted:#5A6B63; --line:#D3DBD0; --accent:#2457E6; --accent-ink:#FFFFFF;
+  --c-tech:#2457E6; --c-consumer:#D9822B; --c-industrial:#6B4FBB; --c-energy:#1C8F6B; --c-health:#C93C5A; --c-retail:#8A7A1E;--c-finance:#0E7490;--c-consult:#5F7A8F;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif; --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){color-scheme:dark;--bg:#0E1815;--surface:#15231E;--ink:#E5EEE8;--muted:#93A69C;--line:#27382F;--accent:#7FA3FF;--accent-ink:#0E1815;
+  --c-tech:#7FA3FF;--c-consumer:#F0A458;--c-industrial:#A894F0;--c-energy:#4FD0A2;--c-health:#F27A94;--c-retail:#CDBB4A;--c-finance:#4CC3DC;--c-consult:#A9BFD0}
+}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0E1815;--surface:#15231E;--ink:#E5EEE8;--muted:#93A69C;--line:#27382F;--accent:#7FA3FF;--accent-ink:#0E1815;
+  --c-tech:#7FA3FF;--c-consumer:#F0A458;--c-industrial:#A894F0;--c-energy:#4FD0A2;--c-health:#F27A94;--c-retail:#CDBB4A;--c-finance:#4CC3DC;--c-consult:#A9BFD0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.6 var(--body)}
+.wrap{max-width:60rem;margin:0 auto;padding:0 1.25rem}
+header.top{padding:1.25rem 0 0;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.brand{font:800 1.15rem var(--display);letter-spacing:-.02em}
+.brand i{font-style:normal;color:var(--accent)}
+nav a{color:var(--muted);text-decoration:none;font-weight:500;margin-left:1.25rem}
+nav a:hover,nav a:focus-visible{color:var(--ink)}
+.hero{padding:clamp(3rem,10vw,6.5rem) 0 2.5rem}
+.path{font:500 clamp(.95rem,2.4vw,1.1rem) var(--body);color:var(--muted);margin:0 0 .75rem}
+.path b{color:var(--accent);font-weight:600}
+h1{font:800 clamp(3.4rem,15vw,9rem)/.88 var(--display);letter-spacing:-.05em;margin:0 0 1.5rem}
+.lede{max-width:34rem;font-size:1.15rem;color:var(--muted);margin:0}
+.tools{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:.9rem 0;border-bottom:1px solid var(--line)}
+.search{width:100%;padding:.8rem 1rem;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:.6rem}
+.search:focus-visible,.chip:focus-visible,.row:focus-visible,nav a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.chips{display:flex;gap:.5rem;overflow-x:auto;padding:.75rem 0 .1rem;scrollbar-width:thin}
+.chip{flex:none;font:500 .92rem var(--body);padding:.4rem .9rem;border-radius:99px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.count{color:var(--muted);font-size:.92rem;margin:1.25rem 0 .5rem}
+.list{margin:0 0 3rem;padding:0;list-style:none;border-top:1px solid var(--line)}
+.item{border-bottom:1px solid var(--line)}
+.row{all:unset;box-sizing:border-box;display:grid;grid-template-columns:.3rem 1fr auto;gap:1rem;align-items:center;width:100%;padding:1.1rem .25rem;cursor:pointer}
+.bar{align-self:stretch;border-radius:2px;background:var(--c)}
+.name{font:800 clamp(1.4rem,4vw,2rem)/1.1 var(--display);letter-spacing:-.03em}
+.meta{display:block;color:var(--muted);font-size:.95rem;margin-top:.2rem}
+.yr{font:500 .95rem var(--body);color:var(--muted);text-align:right}
+.yr svg{display:block;margin:.3rem 0 0 auto;transition:transform .2s}
+.row[aria-expanded="true"] .yr svg{transform:rotate(180deg)}
+.panel{padding:0 .25rem 1.5rem 1.55rem;display:grid;gap:1.1rem;max-width:44rem}
+.panel[hidden]{display:none}
+.panel p{margin:0}
+.panel h3{font:600 .95rem var(--body);margin:0 0 .35rem;color:var(--c)}
+.panel ul{margin:0;padding-left:1.1rem}
+.panel li{margin:.15rem 0}
+.facts{display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;color:var(--muted);font-size:.95rem}
+.facts span b{color:var(--ink);font-weight:600}
+.empty{padding:2rem 0;color:var(--muted)}
+.about{padding:3rem 0;border-top:1px solid var(--line)}
+.about h2{font:800 1.8rem var(--display);letter-spacing:-.03em;margin:0 0 .75rem}
+.about p{max-width:38rem;color:var(--muted);margin:0 0 1rem}
+footer{padding:1.5rem 0 3rem;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (max-width:30rem){nav a{margin-left:.9rem}.panel{padding-left:.5rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">from<i>root</i></div>
+    <nav><a href="#companies">Companies</a> <a href="#about">About</a></nav>
+  </header>
+
+  <section class="hero">
+    <p class="path">/ <b>companies</b> / where they started, what they do</p>
+    <h1>fromroot</h1>
+    <p class="lede">Every global company began as one idea in one place. Explore where today’s multinationals started and what they actually do.</p>
+  </section>
+
+  <div class="tools" id="companies">
+    <input class="search" id="q" type="search" placeholder="Search by company, country or product" aria-label="Search companies" autocomplete="off">
+    <div class="chips" id="chips" role="group" aria-label="Filter by sector"></div>
+  </div>
+
+  <p class="count" id="count" aria-live="polite"></p>
+  <ul class="list" id="list"></ul>
+
+  <section class="about" id="about">
+    <h2>Why fromroot</h2>
+    <p>Company names are everywhere, but the story behind them is usually hidden. fromroot starts at the root: the year, the place and the first product, then follows the company to what it does today.</p>
+    <p>New companies and sectors are added over time. Pick a row above to open the details.</p>
+  </section>
+
+  <footer>fromroot gives general overviews for learning. Figures and business lines change, so check each company’s official website for the latest.</footer>
+</div>
+
+<script>
+const SECTORS=[["all","All"],["tech","Technology"],["consumer","Consumer goods"],["industrial","Industrial & auto"],["energy","Energy"],["health","Healthcare"],["retail","Retail"],["finance","Banking & finance"],["consult","IT services & consulting"]];
+const COLORS={tech:"var(--c-tech)",consumer:"var(--c-consumer)",industrial:"var(--c-industrial)",energy:"var(--c-energy)",health:"var(--c-health)",retail:"var(--c-retail)",finance:"var(--c-finance)",consult:"var(--c-consult)"};
+const D=[
+{n:"Apple",s:"tech",y:1976,hq:"Cupertino, USA",a:"Started by Steve Jobs, Steve Wozniak and Ronald Wayne to build personal computers, and grew into a maker of tightly integrated devices and software.",w:["Designs iPhone, iPad, Mac and Apple Watch","Runs services such as the App Store, iCloud and Apple Music","Designs its own chips for its devices"],k:"iPhone, Mac, iPad, AirPods"},
+{n:"Microsoft",s:"tech",y:1975,hq:"Redmond, USA",a:"Founded by Bill Gates and Paul Allen to write software for early personal computers. Windows and Office later made it a standard in workplaces.",w:["Windows and Microsoft 365 (Office)","Azure cloud computing","Xbox, LinkedIn and GitHub"],k:"Windows, Office, Azure, Xbox"},
+{n:"Alphabet (Google)",s:"tech",y:1998,hq:"Mountain View, USA",a:"Google began as a search engine built by two Stanford students, Larry Page and Sergey Brin. Alphabet became its parent company in 2015.",w:["Search and online advertising","Android, Chrome and YouTube","Google Cloud and AI research"],k:"Search, Android, YouTube, Waymo"},
+{n:"Samsung",s:"tech",y:1938,hq:"Suwon, South Korea",a:"Began as a trading company selling dried fish, produce and noodles, and later moved into electronics and chip making.",w:["Smartphones, TVs and home appliances","Memory chips and displays","Shipbuilding, construction and insurance through group affiliates"],k:"Galaxy phones, QLED TVs, memory chips"},
+{n:"Amazon",s:"retail",y:1994,hq:"Seattle, USA",a:"Jeff Bezos launched it as an online bookstore from his garage, then widened it to nearly every product category.",w:["Online marketplace and delivery network","Amazon Web Services (AWS) cloud platform","Prime Video, Alexa and Kindle"],k:"Amazon.com, AWS, Prime, Kindle"},
+{n:"Walmart",s:"retail",y:1962,hq:"Bentonville, USA",a:"Sam Walton opened the first Walmart in Arkansas with a promise of low prices. It is among the world’s largest retailers.",w:["Supermarkets, discount stores and online shopping","Sam’s Club membership warehouses","Operates in many countries, including India through Flipkart and Walmart wholesale"],k:"Walmart, Sam’s Club, Flipkart"},
+{n:"Toyota",s:"industrial",y:1937,hq:"Toyota City, Japan",a:"Grew out of a loom-making company founded by Sakichi Toyoda. Kiichiro Toyoda set up the car business that became Toyota Motor Corporation.",w:["Cars, trucks and commercial vehicles","Hybrid vehicles, pioneered by the Prius","Developed the Toyota Production System, studied worldwide as lean manufacturing"],k:"Corolla, Camry, Prius, Lexus"},
+{n:"Siemens",s:"industrial",y:1847,hq:"Munich, Germany",a:"Werner von Siemens and Johann Georg Halske opened a telegraph workshop in Berlin. It is now a leading industrial technology company.",w:["Factory automation and industrial software","Rail and mobility technology","Building technology and smart infrastructure"],k:"Automation, trains, medical technology via Siemens Healthineers"},
+{n:"Tata Group",s:"industrial",y:1868,hq:"Mumbai, India",a:"Jamsetji Tata founded a trading firm that grew into India’s largest conglomerate, with businesses from salt to steel to software.",w:["IT services through Tata Consultancy Services","Steel, power and chemicals","Cars through Tata Motors and Jaguar Land Rover; hotels through Taj"],k:"TCS, Tata Steel, Tata Motors, Taj Hotels"},
+{n:"Nestlé",s:"consumer",y:1866,hq:"Vevey, Switzerland",a:"Henri Nestlé developed an infant cereal to help babies who could not be breastfed. The company later became one of the largest food and beverage makers.",w:["Coffee, including Nescafé and Nespresso","Packaged foods, chocolate and bottled water","Pet care and infant nutrition"],k:"Nescafé, Nespresso, Maggi, KitKat"},
+{n:"Unilever",s:"consumer",y:1929,hq:"London, UK",a:"Formed by the merger of Dutch margarine maker Margarine Unie and British soap maker Lever Brothers.",w:["Personal care and beauty products","Home cleaning products","Foods and ice cream, with local arms such as Hindustan Unilever in India"],k:"Dove, Lipton, Surf Excel, Hellmann’s"},
+{n:"Shell",s:"energy",y:1907,hq:"London, UK",a:"Formed when Royal Dutch Petroleum and the British Shell Transport and Trading Company merged their operations.",w:["Oil and natural gas production","Liquefied natural gas (LNG) and fuel retail","Lower-carbon fuels, charging and renewable power projects"],k:"Shell fuel stations, LNG, lubricants"},
+{n:"Johnson & Johnson",s:"health",y:1886,hq:"New Brunswick, USA",a:"Founded by brothers Robert Wood Johnson, James Wood Johnson and Edward Mead Johnson, who made sterile surgical dressings.",w:["Prescription medicines","Medical devices and surgical tools","Its consumer health arm was spun off as Kenvue in 2023"],k:"Medicines, surgical devices"}
+];
+D.push(...[
+["NVIDIA","tech","USA","Designs graphics chips (GPUs) used in gaming, data centres and AI."],
+["Meta Platforms","tech","USA","Owns Facebook, Instagram, WhatsApp and Messenger, and builds VR and AI products."],
+["Tencent","tech","China","Runs the WeChat super-app, a large games business, and cloud and payment services."],
+["TSMC","tech","Taiwan","Taiwan Semiconductor Manufacturing Co., the largest contract chipmaker, making chips designed by other firms."],
+["Broadcom","tech","USA","Makes networking and wireless semiconductors, plus enterprise software such as VMware."],
+["Alibaba Group","tech","China","Runs Taobao and Tmall marketplaces, Alibaba Cloud and logistics."],
+["Intel","tech","USA","Designs and manufactures processors for PCs and servers."],
+["Oracle","tech","USA","Database software, business applications and cloud infrastructure."],
+["IBM","tech","USA","International Business Machines: hybrid cloud, AI, consulting and mainframes."],
+["Adobe","tech","USA","Creative and document software such as Photoshop, Illustrator and Acrobat."],
+["Cisco Systems","tech","USA","Networking equipment, cybersecurity and collaboration tools such as Webex."],
+["Salesforce","tech","USA","Cloud-based customer relationship management (CRM) software."],
+["SAP","tech","Germany","Business software for finance, supply chains and operations."],
+["Sony Group","tech","Japan","Electronics, PlayStation games, music, film and image sensors."],
+["HP Inc.","tech","USA","Personal computers, printers and supplies."],
+["Dell Technologies","tech","USA","PCs, servers and data storage for consumers and businesses."],
+["Panasonic","tech","Japan","Home appliances, batteries and electronic components."],
+["Baidu","tech","China","Chinese search engine that also develops AI and self-driving technology."],
+["ByteDance","tech","China","Owns TikTok and its China version Douyin, built on recommendation algorithms."],
+["ASML","tech","Netherlands","Makes the lithography machines chipmakers use to print circuits on silicon."],
+["AMD","tech","USA","Advanced Micro Devices: processors and graphics chips for PCs, consoles and data centres."],
+["Qualcomm","tech","USA","Designs Snapdragon mobile chips and licenses wireless technology."],
+["Uber","tech","USA","Ride-hailing, food delivery and freight platform."],
+["Netflix","tech","USA","Streaming service that also produces its own films and series."],
+["Infosys","consult","India","IT services, consulting and digital outsourcing."],
+["Accenture","consult","Ireland","Consulting, technology and outsourcing services for large organisations."],
+["Tata Consultancy Services","consult","India","TCS, the IT services arm of the Tata Group and one of India’s largest tech employers."],
+["Capgemini","consult","France","Consulting, technology and engineering services."],
+["Cognizant","consult","USA / India","IT services with a large workforce in India."],
+["Wipro","consult","India","IT services, consulting and business process outsourcing."],
+["HCLTech","consult","India","IT and engineering services."],
+["Deloitte","consult","USA","One of the Big Four: audit, tax, consulting and advisory."],
+["PwC","consult","USA","PricewaterhouseCoopers, a Big Four network for audit, tax and advisory."],
+["EY","consult","USA","Ernst & Young, a Big Four network for audit, tax and consulting."],
+["KPMG","consult","Netherlands","A Big Four network for audit, tax and advisory."],
+["Fujitsu","consult","Japan","IT services, computing hardware and digital transformation."],
+["Mphasis","consult","India","IT, cloud and application services."],
+["Tech Mahindra","consult","India","IT and telecom services, part of the Mahindra Group."],
+["ABB","industrial","Switzerland","Robotics, electrification and industrial automation."],
+["General Electric (GE)","industrial","USA","Known for jet engines through GE Aerospace; its energy business is now GE Vernova."],
+["Honeywell","industrial","USA","Aerospace systems, building technologies and industrial automation."],
+["Schneider Electric","industrial","France","Energy management and automation equipment and software."],
+["Larsen & Toubro (L&T)","industrial","India","Engineering, construction, infrastructure and IT services."],
+["Hitachi","industrial","Japan","Industrial, energy, rail and digital systems."],
+["Volkswagen Group","industrial","Germany","Parent of Volkswagen, Audi, Porsche, Škoda and SEAT."],
+["Tesla","industrial","USA","Electric cars, battery storage and solar products."],
+["Ford","industrial","USA","Cars, trucks and SUVs, including electric models."],
+["General Motors (GM)","industrial","USA","Chevrolet, GMC, Buick and Cadillac vehicles."],
+["Mercedes-Benz Group","industrial","Germany","Luxury cars and vans."],
+["BMW Group","industrial","Germany","BMW, MINI and Rolls-Royce cars, plus BMW motorcycles."],
+["Honda","industrial","Japan","Cars, motorcycles, engines and power equipment."],
+["Hyundai Motor Company","industrial","South Korea","Cars and electric vehicles under Hyundai and Genesis, within the group that also owns Kia."],
+["Maruti Suzuki","industrial","India / Japan","India’s largest carmaker, majority owned by Japan’s Suzuki."],
+["Tata Motors","industrial","India","Cars, SUVs, trucks and EVs, and owner of Jaguar Land Rover."],
+["Stellantis","industrial","Netherlands / Italy / France","Parent of Jeep, Peugeot, Fiat, Citroën and Chrysler."],
+["Nissan","industrial","Japan","Cars and electric vehicles, including the Leaf."],
+["BYD","industrial","China","Electric and hybrid vehicles and batteries."],
+["Boeing","industrial","USA","Commercial jets, defence and space systems."],
+["Airbus","industrial","France","Commercial aircraft, helicopters, defence and space."],
+["Caterpillar","industrial","USA","Construction and mining machinery and engines."],
+["Deere & Company","industrial","USA","Farm and construction machinery sold as John Deere."],
+["Bosch","industrial","Germany","Car components, power tools and home appliances."],
+["Michelin","industrial","France","Tyres, and publisher of the Michelin Guide."],
+["BASF","industrial","Germany","One of the world’s largest chemical makers."],
+["Dow","industrial","USA","Chemicals, plastics and materials science."],
+["3M","industrial","USA","Adhesives, abrasives and materials, and maker of Post-it notes."],
+["Coca-Cola","consumer","USA","Soft drinks and beverages sold in over 200 countries."],
+["PepsiCo","consumer","USA","Pepsi drinks and snacks such as Lay’s and Quaker foods."],
+["Procter & Gamble (P&G)","consumer","USA","Household and personal care brands such as Tide, Pampers and Gillette."],
+["Hindustan Unilever (HUL)","consumer","India / UK","Unilever’s Indian arm, selling home care, personal care, foods and beverages."],
+["L’Oréal","consumer","France","The world’s largest cosmetics company."],
+["Nike","consumer","USA","Sports shoes, clothing and equipment."],
+["Adidas","consumer","Germany","Sports shoes, clothing and equipment."],
+["McDonald’s","consumer","USA","Fast-food chain, largely run through franchises."],
+["Starbucks","consumer","USA","Coffeehouse chain and packaged coffee."],
+["Mondelēz International","consumer","USA","Snack maker behind Oreo, Cadbury and Toblerone."],
+["Colgate-Palmolive","consumer","USA","Toothpaste, soap and pet nutrition products."],
+["Diageo","consumer","UK","Spirits and beer, including Johnnie Walker and Guinness."],
+["Anheuser-Busch InBev","consumer","Belgium","The world’s largest brewer, behind Budweiser and Stella Artois."],
+["Danone","consumer","France","Dairy, plant-based foods and water, including Activia and Evian."],
+["Estée Lauder Companies","consumer","USA","Skincare, makeup and fragrance brands."],
+["Kimberly-Clark","consumer","USA","Personal care and tissue products such as Huggies and Kleenex."],
+["Mars","consumer","USA","Confectionery such as M&M’s and Snickers, plus pet care."],
+["Kellogg Company","consumer","USA","Breakfast cereals and snacks; split in 2023 into Kellanova and WK Kellogg Co."],
+["General Mills","consumer","USA","Packaged foods such as Cheerios and Pillsbury."],
+["Kraft Heinz","consumer","USA","Packaged foods such as Heinz ketchup and Kraft cheese."],
+["LVMH","consumer","France","Luxury group behind Louis Vuitton, Dior, Moët & Chandon and Hennessy."],
+["Gillette","consumer","USA","Razors and grooming products, owned by P&G."],
+["Whirlpool","consumer","USA","Washing machines, refrigerators and other home appliances."],
+["The Home Depot","retail","USA","Home improvement retailer for tools, building materials and décor."],
+["Costco","retail","USA","Membership-based warehouse retailer selling in bulk."],
+["IKEA","retail","Sweden","Flat-pack furniture and home goods sold in large stores."],
+["JPMorgan Chase","finance","USA","The largest US bank by assets: consumer, investment and commercial banking."],
+["Bank of America","finance","USA","Consumer banking, wealth management and investment banking."],
+["Citigroup (Citi)","finance","USA","Global bank serving consumers, companies and governments."],
+["HSBC","finance","UK","Global bank with deep roots in Asia and international trade."],
+["ICBC","finance","China","Industrial and Commercial Bank of China, one of the world’s largest banks by assets."],
+["China Construction Bank","finance","China","One of China’s big state-owned commercial banks."],
+["Agricultural Bank of China","finance","China","One of China’s big state-owned banks, with a strong rural network."],
+["Goldman Sachs","finance","USA","Investment banking, trading and asset management."],
+["Morgan Stanley","finance","USA","Investment banking and wealth management."],
+["Wells Fargo","finance","USA","Retail and commercial banking and mortgages."],
+["Barclays","finance","UK","Retail, corporate and investment banking."],
+["Standard Chartered","finance","UK","Bank focused on Asia, Africa and the Middle East."],
+["BNP Paribas","finance","France","Europe’s major bank for retail, corporate and investment banking."],
+["Deutsche Bank","finance","Germany","Germany’s largest bank for retail, corporate and investment banking."],
+["American Express","finance","USA","Charge and credit cards, and travel and payment services."],
+["Visa","finance","USA","Operates a global payments network; banks issue the cards."],
+["Mastercard","finance","USA","Operates a global payments network; banks issue the cards."],
+["AXA","finance","France","Insurance and asset management."],
+["Allianz","finance","Germany","Insurance and asset management."],
+["Berkshire Hathaway","finance","USA","Holding company that owns insurers such as GEICO, a railroad and many other businesses."],
+["Pfizer","health","USA","Medicines and vaccines, including the Comirnaty COVID-19 vaccine."],
+["Roche","health","Switzerland","Cancer medicines and diagnostic tests."],
+["Novartis","health","Switzerland","Prescription medicines for heart, cancer and immune conditions."],
+["Merck & Co.","health","USA","Medicines and vaccines, including Keytruda; known as MSD outside the US and Canada."],
+["AbbVie","health","USA","Immunology and cancer medicines, and maker of Botox."],
+["Sanofi","health","France","Medicines and vaccines, including diabetes and immunology treatments."],
+["AstraZeneca","health","UK / Sweden","Cancer, heart and respiratory medicines."],
+["GSK","health","UK","GlaxoSmithKline: vaccines and specialty medicines."],
+["Bayer","health","Germany","Pharmaceuticals and crop science."],
+["Abbott Laboratories","health","USA","Medical devices, diagnostics, nutrition and medicines."],
+["UnitedHealth Group","health","USA","Health insurance and care services through UnitedHealthcare and Optum."],
+["CVS Health","health","USA","Pharmacies, health insurance through Aetna, and clinics."],
+["McKesson","health","USA","Distributes medicines and medical supplies."],
+["Novo Nordisk","health","Denmark","Diabetes and obesity treatments, including insulin, Ozempic and Wegovy."],
+["Eli Lilly","health","USA","Medicines for diabetes, obesity, cancer and immune conditions."],
+["Medtronic","health","Ireland / USA","Medical devices such as pacemakers and insulin pumps."],
+["Thermo Fisher Scientific","health","USA","Lab equipment, reagents and services for science and healthcare."],
+["Saudi Aramco","energy","Saudi Arabia","State-controlled oil and gas giant and one of the world’s largest producers."],
+["ExxonMobil","energy","USA","Oil, gas, chemicals and refining."],
+["TotalEnergies","energy","France","Oil and gas, with growing power and renewables businesses."],
+["Chevron","energy","USA","Oil and gas exploration, production and refining."]
+].map(([n,s,c,d])=>({n,s,c,d})));
+const $=id=>document.getElementById(id);
+let sector="all",open=null;
+const chev='<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 5l5 5 5-5"/></svg>';
+function esc(t){return t.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))}
+function chips(){$("chips").innerHTML=SECTORS.map(([k,l])=>`<button class="chip" data-k="${k}" aria-pressed="${k===sector}">${esc(l)}</button>`).join("")}
+function render(){
+  const q=$("q").value.trim().toLowerCase();
+  const rows=D.filter(c=>(sector==="all"||c.s===sector)&&(!q||[c.n,c.hq,c.c,c.k,c.a,c.d,...(c.w||[])].join(" ").toLowerCase().includes(q))).sort((a,b)=>a.n.localeCompare(b.n));
+  $("count").textContent=rows.length+(rows.length===1?" company":" companies");
+  if(!rows.length){$("list").innerHTML='<li class="empty">No company matches that search. Clear the search or pick another sector.</li>';return}
+  $("list").innerHTML=rows.map(c=>{
+    const id="p-"+c.n.replace(/\W+/g,"");const isOpen=open===c.n;
+    return `<li class="item" style="--c:${COLORS[c.s]}">
+      <button class="row" aria-expanded="${isOpen}" aria-controls="${id}" data-n="${esc(c.n)}">
+        <span class="bar"></span>
+        <span><span class="name">${esc(c.n)}</span><span class="meta">${esc(c.hq||c.c)} · ${esc(SECTORS.find(s=>s[0]===c.s)[1])}</span></span>
+        <span class="yr">${c.y?"Since "+c.y:""}${chev}</span>
+      </button>
+      <div class="panel" id="${id}" ${isOpen?"":"hidden"}>
+        ${c.d?`<p>${esc(c.d)}</p><div class="facts"><span><b>Home country</b> ${esc(c.c)}</span></div>`:`<p>${esc(c.a)}</p>
+        <div><h3>What it does</h3><ul>${c.w.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+        <div class="facts"><span><b>Founded</b> ${c.y}</span><span><b>Headquarters</b> ${esc(c.hq)}</span><span><b>Known for</b> ${esc(c.k)}</span></div>`}
+      </div></li>`}).join("");
+}
+$("chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;sector=b.dataset.k;chips();render()});
+$("list").addEventListener("click",e=>{const b=e.target.closest(".row");if(!b)return;open=open===b.dataset.n?null:b.dataset.n;render();const nb=document.querySelector('.row[data-n="'+CSS.escape(b.dataset.n)+'"]');if(nb)nb.focus()});
+$("q").addEventListener("input",render);
+chips();render();
+</script>
+</body>
+</html>
