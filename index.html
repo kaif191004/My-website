@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="google-site-verification" content="zFbbxgkkH_Py_MBMFqtpHFQWsNnEx5wc8HpeOCn4AUc" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231F5BFF'/%3E%3Cpath d='M32 52V32' stroke='white' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3Cpath d='M32 34C20 32 13 24 13 14C24 14 32 21 32 34Z' fill='white'/%3E%3Cpath d='M32 34C44 32 51 24 51 14C40 14 32 21 32 34Z' fill='white' opacity='.7'/%3E%3C/svg%3E">
 <title>fromroot – how the world’s big companies began and what they do</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +33,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .hero{margin-top:1rem;border-radius:1.75rem;color:#fff;padding:1.4rem clamp(1.25rem,5vw,3.5rem) clamp(1.5rem,4vw,2.75rem);overflow:hidden;
   background:radial-gradient(60% 90% at 92% -10%,rgba(115,64,242,.65),transparent 62%),radial-gradient(55% 80% at 0% 110%,rgba(31,91,255,.7),transparent 60%),radial-gradient(40% 60% at 58% 115%,rgba(10,153,112,.4),transparent 65%),#080E22}
 header.top{display:flex;justify-content:space-between;align-items:center;gap:1rem}
-.brand{font:800 1.35rem var(--display);letter-spacing:-.03em}
+.brand{display:inline-flex;align-items:center;gap:.5rem;color:inherit;text-decoration:none;font:800 1.35rem var(--display);letter-spacing:-.03em}
+.brand svg{width:1.9rem;height:1.9rem;flex:none}
 .brand i{font-style:normal;background:linear-gradient(90deg,#7FA3FF,#C9B6FF);-webkit-background-clip:text;background-clip:text;color:transparent}
 nav a{color:rgba(255,255,255,.72);text-decoration:none;font-weight:500;margin-left:1.5rem}
 nav a:hover,nav a:focus-visible{color:#fff}
@@ -98,7 +100,21 @@ h1{font:800 clamp(2.9rem,9.5vw,7rem)/.94 var(--display);letter-spacing:-.045em;m
 .about h2{font:800 clamp(2rem,5vw,3.2rem)/1 var(--display);letter-spacing:-.04em;margin:0}
 .about p{color:var(--muted);font-size:1.1rem;margin:0 0 1rem;max-width:38rem}
 footer{padding:1.5rem 0 3rem;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
-@media (max-width:42rem){.about{grid-template-columns:1fr}.yr span{display:none}.row{grid-template-columns:3rem 1fr auto;gap:.9rem;padding:.9rem}.tile{width:3rem;height:3rem;border-radius:.85rem}.stats{gap:.5rem}.stat{padding:.8rem}.panel{margin:0 .75rem .75rem}}
+footer p{margin:0}
+.copy{margin-top:1.25rem!important;padding-top:1.25rem;border-top:1px solid var(--line);text-align:center;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+
+/* subscribe */
+.subscribe{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(1.25rem,4vw,3rem);align-items:center;margin:0 0 3.5rem;padding:clamp(1.5rem,4vw,2.5rem);border-radius:1.5rem;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}
+.subscribe h2{font:800 clamp(1.6rem,4vw,2.3rem)/1.05 var(--display);letter-spacing:-.04em;margin:0 0 .5rem}
+.subscribe p{margin:0;color:var(--muted)}
+.sub-row{display:flex;gap:.5rem}
+.sub-row input{flex:1;min-width:0;padding:.9rem 1.2rem;font:500 1rem var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:99px}
+.sub-row input::placeholder{color:var(--muted);font-weight:400}
+.sub-row button{flex:none;padding:.9rem 1.5rem;font:700 1rem var(--body);color:var(--bg);background:var(--ink);border:0;border-radius:99px;cursor:pointer}
+.sub-row button:disabled{opacity:.6;cursor:wait}
+.sub-row input:focus-visible,.sub-row button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.sub-msg{min-height:1.5rem;margin-top:.6rem!important;font-size:.92rem}
+@media (max-width:42rem){.about,.subscribe{grid-template-columns:1fr}.sub-row{flex-direction:column}.yr span{display:none}.row{grid-template-columns:3rem 1fr auto;gap:.9rem;padding:.9rem}.tile{width:3rem;height:3rem;border-radius:.85rem}.stats{gap:.5rem}.stat{padding:.8rem}.panel{margin:0 .75rem .75rem}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
 
 /* intro */
@@ -148,10 +164,13 @@ html.intro{overflow:hidden}
   </svg>
   <p>Loading<i>.</i><i>.</i><i>.</i></p>
 </div>
-<div class="wrap">
+<div class="wrap" id="top">
   <section class="hero">
     <header class="top">
-      <div class="brand">from<i>root</i></div>
+      <a class="brand" href="#top" aria-label="fromroot home">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="rgba(255,255,255,.14)"/><path d="M32 52V32" stroke="#fff" stroke-width="5" stroke-linecap="round" fill="none"/><path d="M32 34C20 32 13 24 13 14C24 14 32 21 32 34Z" fill="#7FA3FF"/><path d="M32 34C44 32 51 24 51 14C40 14 32 21 32 34Z" fill="#C9B6FF"/></svg>
+        <span>from<i>root</i></span>
+      </a>
       <nav><a href="#companies">Companies</a><a href="#about">About</a></nav>
     </header>
     <div class="hero-body">
@@ -186,7 +205,24 @@ html.intro{overflow:hidden}
     </div>
   </section>
 
-  <footer>fromroot gives general overviews for learning. Controversies are short summaries of widely reported public matters, not legal advice, and outcomes may have changed since. Figures and business lines change, so check each company’s official website for the latest.</footer>
+  <section class="subscribe" aria-labelledby="sub-title">
+    <div>
+      <h2 id="sub-title">Get new companies first.</h2>
+      <p>Add your email and we’ll tell you when new companies and sectors are added. No spam.</p>
+    </div>
+    <form id="sub-form" novalidate>
+      <div class="sub-row">
+        <input type="email" name="email" id="sub-email" placeholder="Enter your email" aria-label="Email address" autocomplete="email" required>
+        <button type="submit" id="sub-btn">Subscribe</button>
+      </div>
+      <p class="sub-msg" id="sub-msg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <footer>
+    <p>fromroot gives general overviews for learning. Controversies are short summaries of widely reported public matters, not legal advice, and outcomes may have changed since. Figures and business lines change, so check each company’s official website for the latest.</p>
+    <p class="copy">© <span id="year">2026</span> fromroot. All rights reserved.</p>
+  </footer>
 </div>
 
 <script>
@@ -529,6 +565,23 @@ $("chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)
 $("list").addEventListener("click",e=>{const b=e.target.closest(".row");if(!b)return;open=open===b.dataset.n?null:b.dataset.n;render();const nb=document.querySelector('.row[data-n="'+CSS.escape(b.dataset.n)+'"]');if(nb)nb.focus()});
 $("q").addEventListener("input",render);
 hero();chips();render();
+$("year").textContent=new Date().getFullYear();
+
+/* email subscription (free): paste your Formspree form link here */
+const SUBSCRIBE_URL="https://formspree.io/f/xeagovna";
+$("sub-form").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const msg=$("sub-msg"),btn=$("sub-btn"),email=$("sub-email").value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.textContent="Please enter a valid email address.";return}
+  if(SUBSCRIBE_URL.includes("YOUR_FORM_ID")){msg.textContent="Subscription is not connected yet. Add your Formspree link in the script.";return}
+  btn.disabled=true;msg.textContent="Subscribing…";
+  try{
+    const r=await fetch(SUBSCRIBE_URL,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},body:JSON.stringify({email})});
+    if(!r.ok)throw 0;
+    msg.textContent="Thanks! You’re subscribed.";$("sub-form").reset();
+  }catch(_){msg.textContent="Something went wrong. Please try again."}
+  btn.disabled=false;
+});
 (function(){
   const t0=performance.now(),calm=matchMedia("(prefers-reduced-motion:reduce)").matches,min=calm?500:2400;
   let gone=false;
