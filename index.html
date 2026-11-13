@@ -1,87 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="intro">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="google-site-verification" content="zFbbxgkkH_Py_MBMFqtpHFQWsNnEx5wc8HpeOCn4AUc" />
 <title>fromroot – how the world’s big companies began and what they do</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F1F4EF; --surface:#FFFFFF; --ink:#13241E; --muted:#5A6B63; --line:#D3DBD0; --accent:#2457E6; --accent-ink:#FFFFFF;
-  --c-tech:#2457E6; --c-consumer:#D9822B; --c-industrial:#6B4FBB; --c-energy:#1C8F6B; --c-health:#C93C5A; --c-retail:#8A7A1E;--c-finance:#0E7490;--c-consult:#5F7A8F;
-  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif; --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F4F6FB;--surface:#FFFFFF;--ink:#0A1124;--muted:#566079;--line:#E0E5F0;--accent:#1F5BFF;
+  --c-tech:#1F5BFF;--c-consumer:#E8780C;--c-industrial:#7340F2;--c-energy:#0A9970;--c-health:#E02F5A;--c-retail:#A07F00;--c-finance:#0B7C9C;--c-consult:#52708C;
+  --shadow:0 1px 2px rgba(10,17,36,.05),0 8px 24px -12px rgba(10,17,36,.14);
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;--body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){color-scheme:dark;--bg:#0E1815;--surface:#15231E;--ink:#E5EEE8;--muted:#93A69C;--line:#27382F;--accent:#7FA3FF;--accent-ink:#0E1815;
-  --c-tech:#7FA3FF;--c-consumer:#F0A458;--c-industrial:#A894F0;--c-energy:#4FD0A2;--c-health:#F27A94;--c-retail:#CDBB4A;--c-finance:#4CC3DC;--c-consult:#A9BFD0}
+  :root:not([data-theme="light"]){color-scheme:dark;--bg:#070C1A;--surface:#0F172B;--ink:#EAEFFC;--muted:#8F9BB8;--line:#1F2A45;--accent:#7FA3FF;--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  --c-tech:#6F97FF;--c-consumer:#FFA04A;--c-industrial:#A58CFF;--c-energy:#3FD6A5;--c-health:#FF6E91;--c-retail:#D9BC3A;--c-finance:#45C4E2;--c-consult:#9DB6CC}
 }
-:root[data-theme="dark"]{color-scheme:dark;--bg:#0E1815;--surface:#15231E;--ink:#E5EEE8;--muted:#93A69C;--line:#27382F;--accent:#7FA3FF;--accent-ink:#0E1815;
-  --c-tech:#7FA3FF;--c-consumer:#F0A458;--c-industrial:#A894F0;--c-energy:#4FD0A2;--c-health:#F27A94;--c-retail:#CDBB4A;--c-finance:#4CC3DC;--c-consult:#A9BFD0}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#070C1A;--surface:#0F172B;--ink:#EAEFFC;--muted:#8F9BB8;--line:#1F2A45;--accent:#7FA3FF;--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  --c-tech:#6F97FF;--c-consumer:#FFA04A;--c-industrial:#A58CFF;--c-energy:#3FD6A5;--c-health:#FF6E91;--c-retail:#D9BC3A;--c-finance:#45C4E2;--c-consult:#9DB6CC}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 7rem);scroll-behavior:smooth}
 *,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.6 var(--body)}
-.wrap{max-width:60rem;margin:0 auto;padding:0 1.25rem}
-header.top{padding:1.25rem 0 0;display:flex;justify-content:space-between;align-items:center;gap:1rem}
-.brand{font:800 1.15rem var(--display);letter-spacing:-.02em}
-.brand i{font-style:normal;color:var(--accent)}
-nav a{color:var(--muted);text-decoration:none;font-weight:500;margin-left:1.25rem}
-nav a:hover,nav a:focus-visible{color:var(--ink)}
-.hero{padding:clamp(3rem,10vw,6.5rem) 0 2.5rem}
-.path{font:500 clamp(.95rem,2.4vw,1.1rem) var(--body);color:var(--muted);margin:0 0 .75rem}
-.path b{color:var(--accent);font-weight:600}
-h1{font:800 clamp(3.4rem,15vw,9rem)/.88 var(--display);letter-spacing:-.05em;margin:0 0 1.5rem}
-.lede{max-width:34rem;font-size:1.15rem;color:var(--muted);margin:0}
-.tools{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:.9rem 0;border-bottom:1px solid var(--line)}
-.search{width:100%;padding:.8rem 1rem;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:.6rem}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.6 var(--body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+.wrap{max-width:66rem;margin:0 auto;padding:0 1.25rem}
+
+/* hero */
+.hero{margin-top:1rem;border-radius:1.75rem;color:#fff;padding:1.4rem clamp(1.25rem,5vw,3.5rem) clamp(1.5rem,4vw,2.75rem);overflow:hidden;
+  background:radial-gradient(60% 90% at 92% -10%,rgba(115,64,242,.65),transparent 62%),radial-gradient(55% 80% at 0% 110%,rgba(31,91,255,.7),transparent 60%),radial-gradient(40% 60% at 58% 115%,rgba(10,153,112,.4),transparent 65%),#080E22}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.brand{font:800 1.35rem var(--display);letter-spacing:-.03em}
+.brand i{font-style:normal;background:linear-gradient(90deg,#7FA3FF,#C9B6FF);-webkit-background-clip:text;background-clip:text;color:transparent}
+nav a{color:rgba(255,255,255,.72);text-decoration:none;font-weight:500;margin-left:1.5rem}
+nav a:hover,nav a:focus-visible{color:#fff}
+.hero-body{padding:clamp(3rem,9vw,6.5rem) 0 clamp(2rem,5vw,3rem)}
+h1{font:800 clamp(2.9rem,9.5vw,7rem)/.94 var(--display);letter-spacing:-.045em;margin:0;max-width:11ch}
+.lede{max-width:35rem;font-size:clamp(1.05rem,2.2vw,1.25rem);line-height:1.55;color:rgba(255,255,255,.76);margin:1.5rem 0 0}
+.mix{display:flex;gap:4px;height:.7rem;margin-top:clamp(2rem,5vw,3rem)}
+.mix span{border-radius:99px;background:var(--m);min-width:.7rem}
+.mixnote{margin:.7rem 0 0;font-size:.92rem;color:rgba(255,255,255,.6)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:1.5rem}
+.stat{padding:1rem 1.15rem;border-radius:1rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(8px)}
+.stat b{display:block;font:800 clamp(1.7rem,5vw,2.6rem)/1 var(--display);letter-spacing:-.04em}
+.stat span{display:block;margin-top:.3rem;font-size:.92rem;color:rgba(255,255,255,.65)}
+.ready .hero-body>*,.ready .mix,.ready .mixnote,.ready .stats{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.ready .lede{animation-delay:.12s}.ready .mix{animation-delay:.24s}.ready .mixnote{animation-delay:.3s}.ready .stats{animation-delay:.36s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* toolbar */
+.tools{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;margin-top:1.25rem;padding:.8rem 0;background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.field{position:relative}
+.field svg{position:absolute;left:1.1rem;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.search{width:100%;padding:.95rem 1.2rem .95rem 3rem;font:500 1rem var(--body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:99px;box-shadow:var(--shadow)}
+.search::placeholder{color:var(--muted);font-weight:400}
 .search:focus-visible,.chip:focus-visible,.row:focus-visible,nav a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.chips{display:flex;gap:.5rem;overflow-x:auto;padding:.75rem 0 .1rem;scrollbar-width:thin}
-.chip{flex:none;font:500 .92rem var(--body);padding:.4rem .9rem;border-radius:99px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.chips{display:flex;gap:.5rem;overflow-x:auto;padding:.8rem 0 .15rem;scrollbar-width:none}
+.chip{flex:none;display:inline-flex;align-items:center;gap:.5rem;font:600 .93rem var(--body);padding:.5rem 1rem;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;transition:background .15s,color .15s}
+.chip i{width:.55rem;height:.55rem;border-radius:50%;background:var(--c,var(--ink))}
+.chip:hover{border-color:var(--muted)}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.count{color:var(--muted);font-size:.92rem;margin:1.25rem 0 .5rem}
-.list{margin:0 0 3rem;padding:0;list-style:none;border-top:1px solid var(--line)}
-.item{border-bottom:1px solid var(--line)}
-.row{all:unset;box-sizing:border-box;display:grid;grid-template-columns:.3rem 1fr auto;gap:1rem;align-items:center;width:100%;padding:1.1rem .25rem;cursor:pointer}
-.bar{align-self:stretch;border-radius:2px;background:var(--c)}
-.name{font:800 clamp(1.4rem,4vw,2rem)/1.1 var(--display);letter-spacing:-.03em}
-.meta{display:block;color:var(--muted);font-size:.95rem;margin-top:.2rem}
-.yr{font:500 .95rem var(--body);color:var(--muted);text-align:right}
-.yr svg{display:block;margin:.3rem 0 0 auto;transition:transform .2s}
+.count{color:var(--muted);font-weight:500;margin:1.5rem 0 .9rem}
+
+/* list */
+.list{margin:0 0 4rem;padding:0;list-style:none;display:grid;gap:.75rem}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:1.25rem;box-shadow:var(--shadow);transition:border-color .2s}
+.item:has(.row[aria-expanded="true"]){border-color:color-mix(in srgb,var(--c) 55%,var(--line))}
+.row{all:unset;box-sizing:border-box;display:grid;grid-template-columns:3.4rem 1fr auto;gap:1.1rem;align-items:center;width:100%;padding:1rem 1.25rem;cursor:pointer;border-radius:1.25rem}
+.tile{width:3.4rem;height:3.4rem;border-radius:1rem;display:grid;place-items:center;color:#fff;font:800 1.35rem var(--display);letter-spacing:-.04em;background:linear-gradient(140deg,var(--c),color-mix(in srgb,var(--c) 55%,#000))}
+.name{display:block;font:800 clamp(1.35rem,3.6vw,1.9rem)/1.1 var(--display);letter-spacing:-.035em}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:.25rem .75rem;margin-top:.35rem;color:var(--muted);font-size:.94rem}
+.tag{padding:.1rem .6rem;border-radius:99px;font-weight:600;font-size:.82rem;color:var(--c);background:color-mix(in srgb,var(--c) 12%,transparent)}
+.yr{display:flex;align-items:center;gap:.9rem;color:var(--muted);font-size:.9rem;text-align:right}
+.yr b{display:block;font:800 1.5rem/1 var(--display);letter-spacing:-.03em;color:var(--ink)}
+.yr svg{flex:none;transition:transform .2s}
 .row[aria-expanded="true"] .yr svg{transform:rotate(180deg)}
-.panel{padding:0 .25rem 1.5rem 1.55rem;display:grid;gap:1.1rem;max-width:44rem}
+.panel{margin:0 1.25rem 1.25rem;padding:1.4rem clamp(1rem,3vw,1.75rem);border-radius:1rem;display:grid;gap:1.3rem;background:color-mix(in srgb,var(--c) 7%,var(--surface))}
 .panel[hidden]{display:none}
-.panel p{margin:0}
-.panel h3{font:600 .95rem var(--body);margin:0 0 .35rem;color:var(--c)}
-.panel ul{margin:0;padding-left:1.1rem}
-.panel li{margin:.15rem 0}
-.facts{display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;color:var(--muted);font-size:.95rem}
-.facts span b{color:var(--ink);font-weight:600}
-.empty{padding:2rem 0;color:var(--muted)}
-.about{padding:3rem 0;border-top:1px solid var(--line)}
-.about h2{font:800 1.8rem var(--display);letter-spacing:-.03em;margin:0 0 .75rem}
-.about p{max-width:38rem;color:var(--muted);margin:0 0 1rem}
+.panel p{margin:0;max-width:44rem;font-size:1.05rem}
+.panel .more{color:var(--muted);font-size:1rem}
+.panel h3{font:700 1rem var(--body);margin:0 0 .5rem;color:var(--c)}
+.panel ul{margin:0;padding:0;list-style:none;display:grid;gap:.4rem}
+.panel li{position:relative;padding-left:1.4rem}
+.panel li::before{content:"";position:absolute;left:0;top:.6rem;width:.6rem;height:.6rem;border-radius:50%;background:var(--c)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.75rem}
+.facts div{padding:.8rem 1rem;border-radius:.85rem;background:var(--surface);border:1px solid var(--line)}
+.facts small{display:block;color:var(--muted);font-size:.85rem;font-weight:500}
+.facts b{display:block;font-weight:600;line-height:1.35;margin-top:.1rem}
+.ctr{padding:1rem 1.15rem;border-radius:.85rem;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--c)}
+.ctr h3{color:var(--ink)}
+.empty{padding:3rem 1rem;text-align:center;color:var(--muted)}
+
+/* about */
+.about{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(1.5rem,5vw,4rem);padding:3.5rem 0;border-top:1px solid var(--line)}
+.about h2{font:800 clamp(2rem,5vw,3.2rem)/1 var(--display);letter-spacing:-.04em;margin:0}
+.about p{color:var(--muted);font-size:1.1rem;margin:0 0 1rem;max-width:38rem}
 footer{padding:1.5rem 0 3rem;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
-@media (max-width:30rem){nav a{margin-left:.9rem}.panel{padding-left:.5rem}}
+@media (max-width:42rem){.about{grid-template-columns:1fr}.yr span{display:none}.row{grid-template-columns:3rem 1fr auto;gap:.9rem;padding:.9rem}.tile{width:3rem;height:3rem;border-radius:.85rem}.stats{gap:.5rem}.stat{padding:.8rem}.panel{margin:0 .75rem .75rem}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+
+/* intro */
+html.intro{overflow:hidden}
+#intro{position:fixed;inset:0;z-index:100;display:grid;place-content:center;justify-items:center;gap:1rem;background:var(--bg);color:var(--ink);transition:opacity .6s ease,visibility .6s}
+#intro.done{opacity:0;visibility:hidden}
+#intro svg{width:min(9rem,42vw);height:auto;overflow:visible}
+#intro p{margin:0;font:500 .9rem var(--body);letter-spacing:.01em}
+#intro p i{font-style:normal;animation:blink 1.2s infinite both}
+#intro p i:nth-child(2){animation-delay:.2s}#intro p i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,100%{opacity:.15}40%{opacity:1}}
+.hop{animation:hop .15s ease-in-out infinite alternate}
+.lim{animation:swing .3s ease-in-out infinite alternate}
+.lim.b{animation-delay:-.3s}
+.arm{transform-origin:80px 56px}.arm.b{transform-origin:120px 56px}
+.leg{transform-origin:92px 84px}.leg.b{transform-origin:110px 84px}
+.lean{transform:rotate(9deg);transform-origin:100px 100px}
+.sprout{transform-origin:100px 24px;animation:sway .3s ease-in-out infinite alternate}
+.ground{stroke-dasharray:14 12;animation:slide .6s linear infinite}
+.dust{animation:dust .6s ease-out infinite}.dust:nth-of-type(2){animation-delay:-.3s}
+@keyframes hop{from{transform:translateY(0)}to{transform:translateY(-5px)}}
+@keyframes swing{from{transform:rotate(-42deg)}to{transform:rotate(42deg)}}
+@keyframes sway{from{transform:rotate(-8deg)}to{transform:rotate(8deg)}}
+@keyframes slide{to{stroke-dashoffset:26}}
+@keyframes dust{from{transform:translate(0,0) scale(.6);opacity:.55}to{transform:translate(-26px,-6px) scale(1.3);opacity:0}}
 </style>
 </head>
 <body>
+<noscript><style>#intro{display:none}html.intro{overflow:auto}</style></noscript>
+<div id="intro" role="status" aria-label="Loading fromroot">
+  <svg viewBox="0 0 200 124" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+    <ellipse cx="100" cy="106" rx="32" ry="4" fill="currentColor" stroke="none" opacity=".12"/>
+    <line x1="0" y1="106" x2="200" y2="106" stroke-width="2"/>
+    <line class="ground" x1="-20" y1="114" x2="220" y2="114" stroke-width="2" opacity=".5"/>
+    <circle class="dust" cx="76" cy="102" r="3.5" fill="currentColor" stroke="none"/>
+    <circle class="dust" cx="76" cy="102" r="3" fill="currentColor" stroke="none"/>
+    <g class="lean"><g class="hop">
+      <g class="lim b leg b"><path d="M110 84 V100 H120" /></g>
+      <g class="lim arm b"><path d="M120 56 L134 70"/></g>
+      <rect x="78" y="24" width="44" height="60" rx="22" style="fill:var(--bg)"/>
+      <g class="sprout"><path d="M100 24 V12"/><path d="M100 14 C90 2 77 4 75 10 C83 17 94 17 100 14Z" style="fill:var(--bg)"/><path d="M100 14 C110 2 123 4 125 10 C117 17 106 17 100 14Z" style="fill:currentColor"/></g>
+      <circle cx="93" cy="46" r="3.6" fill="currentColor" stroke="none"/><circle cx="111" cy="46" r="3.6" fill="currentColor" stroke="none"/>
+      <path d="M96 58 Q102 64 108 58"/>
+      <g class="lim leg"><path d="M92 84 V100 H102"/></g>
+      <g class="lim arm"><path d="M80 56 L66 70"/></g>
+    </g></g>
+  </svg>
+  <p>Loading<i>.</i><i>.</i><i>.</i></p>
+</div>
 <div class="wrap">
-  <header class="top">
-    <div class="brand">from<i>root</i></div>
-    <nav><a href="#companies">Companies</a> <a href="#about">About</a></nav>
-  </header>
-
   <section class="hero">
-    <p class="path">/ <b>companies</b> / where they started, what they do</p>
-    <h1>fromroot</h1>
-    <p class="lede">Every global company began as one idea in one place. Explore where today’s multinationals started and what they actually do.</p>
+    <header class="top">
+      <div class="brand">from<i>root</i></div>
+      <nav><a href="#companies">Companies</a><a href="#about">About</a></nav>
+    </header>
+    <div class="hero-body">
+      <h1>Every giant started small.</h1>
+      <p class="lede">See where today’s biggest companies began, who started them, and what they actually do now.</p>
+      <div class="mix" id="mix" aria-hidden="true"></div>
+      <p class="mixnote">Companies by sector</p>
+      <div class="stats">
+        <div class="stat"><b id="s1">0</b><span>Companies</span></div>
+        <div class="stat"><b id="s2">0</b><span>Sectors</span></div>
+        <div class="stat"><b id="s3">0</b><span id="s3l">Oldest founding</span></div>
+      </div>
+    </div>
   </section>
 
   <div class="tools" id="companies">
-    <input class="search" id="q" type="search" placeholder="Search by company, country or product" aria-label="Search companies" autocomplete="off">
+    <div class="field">
+      <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="M14 14l4 4"/></svg>
+      <input class="search" id="q" type="search" placeholder="Search by company, country or product" aria-label="Search companies" autocomplete="off">
+    </div>
     <div class="chips" id="chips" role="group" aria-label="Filter by sector"></div>
   </div>
 
@@ -89,12 +179,14 @@ footer{padding:1.5rem 0 3rem;color:var(--muted);font-size:.9rem;border-top:1px s
   <ul class="list" id="list"></ul>
 
   <section class="about" id="about">
-    <h2>Why fromroot</h2>
-    <p>Company names are everywhere, but the story behind them is usually hidden. fromroot starts at the root: the year, the place and the first product, then follows the company to what it does today.</p>
-    <p>New companies and sectors are added over time. Pick a row above to open the details.</p>
+    <h2>Start at the root.</h2>
+    <div>
+      <p>Company names are everywhere, but the story behind them is usually hidden. fromroot begins with the year, the place and the first product, then follows each company to what it does today.</p>
+      <p>New companies and sectors are added over time. Open any company above to read its story.</p>
+    </div>
   </section>
 
-  <footer>fromroot gives general overviews for learning. Figures and business lines change, so check each company’s official website for the latest.</footer>
+  <footer>fromroot gives general overviews for learning. Controversies are short summaries of widely reported public matters, not legal advice, and outcomes may have changed since. Figures and business lines change, so check each company’s official website for the latest.</footer>
 </div>
 
 <script>
@@ -250,34 +342,208 @@ D.push(...[
 ["TotalEnergies","energy","France","Oil and gas, with growing power and renewables businesses."],
 ["Chevron","energy","USA","Oil and gas exploration, production and refining."]
 ].map(([n,s,c,d])=>({n,s,c,d})));
+const X={
+"Apple":{m:"Apple designs hardware, software and services together, so its iPhone, Mac and Watch work as one system. Most of its profit comes from iPhone sales and from services such as the App Store, iCloud and Apple Music. Its devices are mostly assembled by partner factories in Asia.",c:"In 2017 Apple admitted that software updates slowed older iPhones with ageing batteries. It settled US lawsuits for up to $500 million in 2020 and was fined in France and Italy."},
+"Microsoft":{m:"Microsoft earns most of its money from business software and cloud services. Windows and Microsoft 365 are used in offices worldwide, and Azure rents computing power to companies. It also owns LinkedIn, GitHub and the Xbox business.",c:"In 2000 a US court found Microsoft had illegally kept a monopoly, partly by bundling Internet Explorer with Windows. EU regulators later fined it several times over browser and software bundling."},
+"Alphabet (Google)":{m:"Google earns most of its money from ads shown on Search, YouTube and partner sites. It also builds Android, Chrome, Maps and Gmail, and sells cloud and AI services. Alphabet’s other bets include Waymo self-driving taxis.",c:"In 2024 a US federal judge ruled that Google illegally maintained a monopoly in online search. The EU also fined it €4.34 billion in 2018 over Android."},
+"Samsung":{m:"Samsung is a group of many companies. Its electronics arm sells Galaxy phones, TVs and appliances, while its chip business makes memory chips used in phones and computers. It is one of the largest memory-chip and display makers in the world.",c:"Chairman Lee Jae-yong was jailed over bribery linked to a corruption scandal involving then-president Park Geun-hye, and was pardoned in 2022. In 2016 the Galaxy Note 7 was recalled after battery fires."},
+"Amazon":{m:"Amazon started as a bookstore and now sells almost everything online, both its own goods and those of third-party sellers. Its cloud arm, AWS, is one of the world’s biggest and earns most of its profit. It also runs a large delivery network, Prime Video and Alexa.",c:"Warehouse working conditions, injury rates and resistance to unions have drawn criticism. The US FTC sued Amazon in 2023 over alleged monopoly practices, and in 2025 it agreed to a $2.5 billion settlement in a separate case over Prime sign-ups."},
+"Walmart":{m:"Walmart runs discount stores and supermarkets, and is one of the world’s largest retailers. Its model is low prices on a huge range of everyday goods. It also operates Sam’s Club warehouses and online shopping, and owns Flipkart in India.",c:"A US investigation looked at bribes paid by its Mexican arm; Walmart paid $282 million in 2019 to settle bribery-law charges. It has also been criticised over low wages."},
+"Toyota":{m:"Toyota is one of the world’s biggest carmakers, selling Toyota and Lexus vehicles. It popularised hybrid cars with the Prius and is known for lean manufacturing methods that cut waste. It also owns Daihatsu and Hino.",c:"Around 2009–10 Toyota recalled millions of cars over accelerator problems linked to crashes, and paid a $1.2 billion US penalty in 2014 over how it handled the issue. In 2023 safety-testing scandals hit its Daihatsu unit."},
+"Siemens":{m:"Siemens makes the technology behind factories, power grids, buildings and trains. Its software and automation systems help industries design and run production. Its medical imaging business works separately as Siemens Healthineers.",c:"In 2008 Siemens paid about $1.6 billion to US and German authorities to settle a global bribery scandal, one of the largest corruption cases of its time."},
+"Tata Group":{m:"Tata Group is a huge Indian conglomerate controlled through the holding company Tata Sons. It covers IT services, steel, vehicles, hotels, power, retail and more. Much of Tata Sons is owned by charitable trusts.",c:"In 2016 Cyrus Mistry was removed as chairman of Tata Sons, leading to a long court fight that India’s Supreme Court decided in Tata Sons’ favour in 2021. Protests over land at Singur forced the Nano plant out of West Bengal in 2008."},
+"Nestlé":{m:"Nestlé is the world’s largest packaged food company. It makes coffee, infant nutrition, chocolate, bottled water, pet food and ready meals. It sells in most countries around the world.",c:"Its marketing of infant formula in poorer countries led to a global boycott starting in 1977. In 2015 India’s food regulator banned Maggi noodles over lead and MSG concerns; the ban was lifted after further testing."},
+"Unilever":{m:"Unilever makes everyday products for the home, including soap, shampoo, food and ice cream. Its brands include Dove, Lipton, Knorr and Surf Excel. In India it operates through Hindustan Unilever.",c:"Hindustan Unilever’s thermometer factory in Kodaikanal, Tamil Nadu, was accused of mercury pollution; it closed in 2001, and the company settled with former workers in 2016."},
+"Shell":{m:"Shell finds, produces, refines and sells oil and gas, and is one of the biggest sellers of liquefied natural gas (LNG). It runs petrol stations and makes lubricants and chemicals. It is also investing in biofuels, EV charging and renewable power.",c:"In 2021 a Dutch court ordered Shell to cut emissions by 45% by 2030, a ruling overturned on appeal in 2024. It has long faced criticism over oil spills in Nigeria’s Niger Delta."},
+"Johnson & Johnson":{m:"J&J’s main businesses today are prescription medicines and medical devices such as surgical and orthopaedic tools. It once also sold consumer products such as Band-Aid and Tylenol, which moved to Kenvue in 2023.",c:"Tens of thousands of people have sued over claims that its talc baby powder was contaminated with asbestos, which J&J denies. It was also ordered to pay $572 million over opioids in Oklahoma in 2019, a ruling later reversed."},
+"Meta Platforms":{m:"Meta earns nearly all its money from advertising across Facebook, Instagram, WhatsApp and Messenger, which reach billions of people. It is also investing in AI and in virtual and augmented reality, including Quest headsets.",c:"In 2019 the US FTC fined Facebook $5 billion over privacy violations, after the Cambridge Analytica scandal exposed data of up to 87 million users."},
+"Tesla":{m:"Tesla makes electric cars such as the Model 3 and Model Y, and sells batteries for homes and power grids. It also sells solar products and runs its own fast-charging network. Cars get new features through over-the-air software updates.",c:"US regulators investigated crashes involving its Autopilot driver-assistance system, leading to a 2023 recall of about 2 million vehicles."},
+"Boeing":{m:"Boeing builds commercial jets such as the 737 and 787, as well as military aircraft, helicopters and satellites. It sells to airlines and governments and supports aircraft with parts and services.",c:"Two 737 MAX crashes in 2018 and 2019 killed 346 people and grounded the jets worldwide. In 2021 Boeing agreed to pay $2.5 billion to settle a US criminal investigation into misleading regulators about the plane."},
+"Volkswagen Group":{m:"Volkswagen Group owns Volkswagen, Audi, Porsche, Škoda, Bentley, Lamborghini and truck brands such as Scania. It is one of the largest carmakers in the world and is shifting its lineup towards electric vehicles.",c:"“Dieselgate”: in 2015 VW admitted fitting software to diesel cars to cheat emissions tests. It cost the company tens of billions of euros in fines, settlements and recalls."},
+"Coca-Cola":{m:"Coca-Cola mostly sells syrup and concentrate to bottling partners, who make and distribute the drinks. Its brands include Coca-Cola, Sprite, Fanta, Thums Up and Minute Maid, plus water, juice and sports drinks.",c:"It has been criticised over plastic waste and heavy water use. In India, villagers and activists protested its Plachimada plant in Kerala, which stopped production in 2004."},
+"Nike":{m:"Nike designs and sells shoes, clothing and equipment, mostly made by contract factories in Asia. Its brands include Air Jordan and Converse. It sponsors major athletes and teams.",c:"In the 1990s Nike faced global criticism over sweatshop conditions and child labour in supplier factories, which pushed it to publish factory lists and tighten monitoring."},
+"Pfizer":{m:"Pfizer develops and sells medicines and vaccines for heart disease, cancer, infections and more. It worked with BioNTech on the widely used Comirnaty COVID-19 vaccine, and sells its products worldwide.",c:"In 2009 Pfizer paid $2.3 billion, then a record, to settle US charges that it illegally marketed drugs for unapproved uses."},
+"Bayer":{m:"Bayer has two main businesses: pharmaceuticals, including heart and cancer medicines, and crop science, which sells seeds and crop-protection chemicals. It also sells some consumer health products such as Aspirin.",c:"After buying Monsanto in 2018, Bayer faced lawsuits claiming its Roundup weedkiller causes cancer, which it disputes. It agreed to pay over $10 billion in 2020, and cases continue."},
+"ExxonMobil":{m:"ExxonMobil produces oil and natural gas, refines it into fuels, and makes chemicals and plastics. It is one of the largest publicly traded oil companies, and is also investing in carbon capture.",c:"The Exxon Valdez tanker spilled about 11 million US gallons of oil in Alaska in 1989. Lawsuits and investigations also allege it knew about climate risks decades ago yet cast public doubt; Exxon denies this."},
+"Saudi Aramco":{m:"Aramco, the Saudi state oil company, pumps and sells crude oil and gas and is among the largest oil producers in the world. It also refines fuel and makes chemicals. Saudi Arabia’s government owns most of it.",c:"Analyses such as the Carbon Majors database rank it among the largest corporate contributors to historical greenhouse gas emissions."},
+"JPMorgan Chase":{m:"JPMorgan Chase is the largest bank in the US by assets. It offers everyday banking, credit cards, mortgages, investment banking and asset management, and companies use it for loans, trading and payments.",c:"In 2013 it agreed to pay $13 billion to settle US claims over mortgage securities sold before the 2008 crisis. In 2023 it paid $290 million to settle lawsuits over its links to Jeffrey Epstein."},
+"Goldman Sachs":{m:"Goldman Sachs advises companies on mergers, helps them raise money through shares and bonds, and trades in financial markets. It also manages money for wealthy clients and institutions.",c:"The 1MDB scandal: Goldman helped raise about $6.5 billion in bonds for a Malaysian state fund, much of which was stolen. It agreed to pay over $2.9 billion in a 2020 settlement."},
+"HSBC":{m:"HSBC is one of the largest banks in the world. It focuses on international trade, with major operations in Asia, the UK and the Middle East, and offers everyday banking, loans and wealth management.",c:"In 2012 HSBC paid $1.9 billion to US authorities after investigators found weak controls let drug cartels and others launder money through the bank."},
+"Wells Fargo":{m:"Wells Fargo provides everyday banking, home loans and credit cards in the US, along with business lending and investment services. It is one of the largest US banks by assets.",c:"In 2016 it emerged that staff had opened millions of accounts without customers’ consent to hit sales targets. The bank paid $3 billion in 2020 to settle US investigations."},
+"Infosys":{m:"Infosys, based in Bengaluru, provides IT services such as building and maintaining software, cloud migration and consulting for large companies abroad. It is one of India’s largest IT companies.",c:"In 2013 Infosys paid $34 million to settle US allegations that it misused business visas to send workers to the US."},
+"Maruti Suzuki":{m:"Maruti Suzuki is India’s biggest carmaker, selling small cars and SUVs such as the Swift, Baleno and Brezza. Japan’s Suzuki holds the controlling stake. It has a very large dealer and service network across India.",c:"Violence at its Manesar plant in Haryana in 2012 killed a manager. Thirteen workers were sentenced to life in prison in 2017, and unions and rights groups questioned the fairness of the case."},
+"Uber":{m:"Uber connects riders with drivers through an app, and also runs food delivery with Uber Eats and a freight business. Drivers are mostly independent contractors who pay Uber a commission.",c:"In 2021 the UK Supreme Court ruled Uber drivers are “workers” with rights such as minimum pay. In 2022 the “Uber Files” leak reported that it pushed into new markets by aggressively bending rules."},
+"Alibaba Group":{m:"Alibaba runs online marketplaces such as Taobao and Tmall, where millions of merchants sell to Chinese shoppers. It also owns Alibaba Cloud, digital payments and logistics services.",c:"In 2021 Chinese regulators fined Alibaba about $2.8 billion after an antitrust probe found it forced merchants to sell only on its platforms."},
+"ByteDance":{m:"ByteDance builds apps that use recommendation algorithms to decide what each user sees. Its biggest products are TikTok outside China and Douyin inside it. It earns mostly from advertising.",c:"A 2024 US law required ByteDance to sell TikTok’s US business or face a ban, over national-security concerns about data access. TikTok and ByteDance deny sharing US user data with China’s government."},
+"Sony Group":{m:"Sony makes PlayStation consoles and games, TVs, cameras and image sensors used in many phones. It also owns a major music label and film and anime businesses.",c:"In 2011 hackers stole personal data from about 77 million PlayStation Network accounts, and the service was down for about three weeks."},
+"EY":{m:"EY, formerly Ernst & Young, is one of the Big Four firms. It audits company accounts, advises on tax and deals, and does consulting for businesses and governments.",c:"EY audited Wirecard, the German payments firm that collapsed in 2020 after €1.9 billion went missing. German regulators later restricted EY’s audit work there."},
+"PwC":{m:"PwC (PricewaterhouseCoopers) is one of the Big Four firms. It audits companies, advises on tax and mergers, and does consulting for businesses and governments.",c:"In 2024 Chinese regulators banned PwC China from some work for six months and fined it about $62 million over its audit of property giant Evergrande."},
+"KPMG":{m:"KPMG is one of the Big Four firms. It audits companies, advises on tax and risk, and does consulting around the world.",c:"In 2017 KPMG South Africa faced a scandal over work linked to the Gupta family and a tax-authority report. Its top leaders resigned and the firm apologised."},
+"General Electric (GE)":{m:"GE was once a sprawling conglomerate and has split into focused companies. GE Aerospace makes jet engines, and GE Vernova makes power equipment such as turbines and wind generators.",c:"In 2020 GE paid $200 million to settle US charges that it misled investors about its power business and cash flow. It had earlier taken huge losses in that unit."},
+"ABB":{m:"ABB makes robots, electric motors, power equipment and automation systems used in factories, grids and buildings. It operates in more than 100 countries.",c:"In 2022 ABB paid over $315 million to US, Swiss and South African authorities to settle bribery charges tied to contracts with South Africa’s state power utility Eskom."},
+"Fujitsu":{m:"Fujitsu provides IT services, computer hardware and cloud systems to governments and large companies. It is Japan’s biggest IT services provider.",c:"Its Horizon accounting software was at the centre of the UK Post Office scandal, in which hundreds of sub-postmasters were wrongly prosecuted. Fujitsu apologised in 2024 as a public inquiry continued."},
+"Mercedes-Benz Group":{m:"Mercedes-Benz makes luxury cars, SUVs and vans, including electric models. Its brands include Mercedes-AMG and Maybach.",c:"In 2020 Daimler (now Mercedes-Benz Group) agreed to pay about $2.2 billion to settle US claims over diesel cars that emitted more pollution than tests showed."},
+"BMW Group":{m:"BMW Group makes BMW and MINI cars, Rolls-Royce cars and BMW motorcycles. It is also expanding its range of electric vehicles.",c:"In 2021 the EU fined BMW and Volkswagen €875 million for colluding to limit the development of emissions-cleaning technology."},
+"General Motors (GM)":{m:"GM makes and sells Chevrolet, GMC, Buick and Cadillac vehicles. It is a large player in the US and China, and is expanding into electric vehicles.",c:"GM waited years to recall cars with faulty ignition switches, which a compensation fund linked to 124 deaths. It paid $900 million to settle a US criminal case in 2015."},
+"Nissan":{m:"Nissan makes cars and trucks under the Nissan and Infiniti brands, and the Leaf electric car. It is in an alliance with Renault and Mitsubishi.",c:"Former chairman Carlos Ghosn was arrested in Japan in 2018 over alleged financial misconduct, which he denies. In 2019 he fled to Lebanon."},
+"Airbus":{m:"Airbus builds passenger planes such as the A320 and A350, as well as helicopters, military aircraft and satellites. Its main rival is Boeing.",c:"In 2020 Airbus paid about €3.6 billion to settle bribery and corruption investigations in France, the UK and the US."},
+"Bosch":{m:"Bosch supplies car parts such as brakes and fuel systems, and also makes power tools and home appliances. It is owned mainly by a charitable foundation.",c:"In 2020 Bosch agreed to pay $327.5 million to settle US claims that its software helped carmakers cheat diesel emissions tests."},
+"Citigroup (Citi)":{m:"Citi is a global bank that serves consumers, companies and governments in over 100 countries. It is known for credit cards, cross-border payments and investment banking.",c:"Citi needed a US government rescue of about $45 billion in 2008. In 2020 a US regulator fined it $400 million over weak risk management."},
+"Bank of America":{m:"Bank of America provides everyday banking, credit cards, mortgages and wealth management in the US. It also has a large investment banking arm.",c:"In 2014 it agreed to a $16.65 billion settlement with US authorities over mortgage securities sold before the 2008 financial crisis."},
+"Barclays":{m:"Barclays is a British bank with retail banking, credit cards, and a large investment bank. It serves customers in the UK, the US and elsewhere.",c:"In 2012 Barclays was fined about £290 million for manipulating the Libor interest rate. CEO Bob Diamond resigned."},
+"BNP Paribas":{m:"BNP Paribas is one of Europe’s largest banks. It offers retail banking, corporate lending, investment banking and insurance across Europe and beyond.",c:"In 2014 it pleaded guilty and paid $8.9 billion for breaking US sanctions on Sudan, Iran and Cuba."},
+"Deutsche Bank":{m:"Deutsche Bank is Germany’s largest bank. It serves everyday customers, companies and investors, and is a major player in trading and payments.",c:"In 2016 it agreed to a $7.2 billion US settlement over mortgage securities. In 2017 it was fined about $630 million over “mirror trades” that moved around $10 billion out of Russia."},
+"Allianz":{m:"Allianz is one of the world’s biggest insurers. It sells life, health, property and car insurance, and manages investments through units such as PIMCO.",c:"In 2022 its asset manager Allianz Global Investors pleaded guilty in the US over the Structured Alpha funds, which lost investors more than $7 billion in 2020. Allianz agreed to pay about $6 billion."},
+"Novartis":{m:"Novartis develops prescription medicines for cancer, heart disease and eye and immune conditions. It split off its generics business, Sandoz, in 2023.",c:"In 2013 India’s Supreme Court rejected Novartis’s patent claim on a form of the cancer drug Glivec, a landmark ruling for cheaper generic medicines."},
+"Merck & Co.":{m:"Merck makes prescription medicines and vaccines, including the cancer drug Keytruda and the HPV vaccine Gardasil. It is known as MSD outside the US and Canada.",c:"In 2004 Merck pulled its painkiller Vioxx after a study showed higher heart attack risk. It agreed to a $4.85 billion settlement in 2007."},
+"Sanofi":{m:"Sanofi develops and sells vaccines and medicines for diabetes, immune conditions and rare diseases. It is one of the world’s largest vaccine makers.",c:"In 2017 Sanofi said its dengue vaccine Dengvaxia could worsen illness in people not previously infected. The Philippines halted its programme, which led to public fear and investigations."},
+"GSK":{m:"GSK (GlaxoSmithKline) makes vaccines and specialty medicines, including for asthma and HIV. It spun off its consumer health business as Haleon in 2022.",c:"In 2012 GSK agreed to pay $3 billion to the US, then a record, for illegal drug marketing and failing to report safety data."},
+"Dow":{m:"Dow makes chemicals, plastics and materials used in packaging, building products and electronics. It is one of the largest chemical companies in the world.",c:"Dow bought Union Carbide in 2001, which ran the plant behind the 1984 Bhopal gas disaster in India. Dow says liability was settled in 1989; survivors’ groups still campaign against it."},
+"3M":{m:"3M makes thousands of products, including Post-it notes, adhesives, masks and abrasives. It sells to industry, healthcare and consumers.",c:"In 2023 3M agreed to pay at least $10.3 billion to US water systems over contamination from PFAS “forever chemicals”. It said it would stop making PFAS by the end of 2025."},
+"McKesson":{m:"McKesson is a large US distributor of medicines and medical supplies to pharmacies, hospitals and clinics. It also provides health IT services.",c:"With two other distributors and Johnson & Johnson, McKesson agreed in 2021 to pay up to $26 billion to settle US opioid lawsuits."},
+"TotalEnergies":{m:"TotalEnergies produces oil and gas, sells fuel and power, and is investing in solar, wind and batteries. It operates in more than 100 countries.",c:"Rights groups have criticised its East African Crude Oil Pipeline in Uganda and Tanzania over displaced families and climate impact. The company says it follows international standards."},
+"Chevron":{m:"Chevron explores for and produces oil and gas, and refines and sells fuels and chemicals. It operates worldwide and is one of the biggest US oil companies.",c:"In 2011 an Ecuadorian court ordered Chevron to pay about $9.5 billion over Amazon oil pollution by Texaco. Chevron denied it, and a US judge found the judgment was obtained by fraud."},
+"Intel":{m:"Intel designs and manufactures processors for PCs, servers and data centres. It also makes networking chips and runs a growing contract chip-making business.",c:"In 2009 the EU fined Intel €1.06 billion for paying PC makers to favour its chips over AMD’s. EU courts annulled that decision in 2022 after a long legal fight."},
+"Qualcomm":{m:"Qualcomm designs Snapdragon chips for smartphones and licenses the wireless patents behind most mobile networks. Much of its profit comes from those licences.",c:"In 2016 South Korea fined Qualcomm about $850 million for abusing its dominance in patent licensing. Qualcomm appealed."},
+"SAP":{m:"SAP makes enterprise software that large companies use to manage finance, supply chains, HR and sales. Its systems run inside many of the world’s biggest firms.",c:"In 2024 SAP agreed to pay about $220 million to settle US bribery charges over contracts in South Africa and Indonesia."},
+"Cognizant":{m:"Cognizant provides IT services, consulting and outsourcing to large companies, and has a very large workforce in India. Its Indian operations are based mainly in Chennai.",c:"In 2019 Cognizant paid $25 million to settle US charges over a bribe paid to Indian officials to obtain a permit for a Chennai campus. Two former executives were charged."},
+"Honeywell":{m:"Honeywell makes aerospace systems, building controls, industrial automation and safety equipment. It is a major supplier to aircraft and factory makers.",c:"In 2022 Honeywell paid over $200 million to settle US bribery charges involving deals in Brazil and Algeria."},
+"PepsiCo":{m:"PepsiCo sells drinks such as Pepsi and Mountain Dew and snacks such as Lay’s, Doritos and Kurkure. Its snacks business earns more than its drinks.",c:"In 2019 PepsiCo sued Indian farmers for growing a potato variety it said was protected for its Lay’s chips. After public outcry it withdrew the cases."},
+"Adidas":{m:"Adidas designs and sells sports shoes, clothing and equipment. It is the second-biggest sportswear brand after Nike and sponsors major teams and athletes.",c:"In 2022 Adidas ended its Yeezy deal with Ye after his antisemitic remarks, then faced investor lawsuits over how it handled the partnership."},
+"McDonald’s":{m:"McDonald’s runs one of the world’s largest fast-food chains, mostly through franchisees. It earns heavily from franchise fees and property rent.",c:"In the 1990s the “McLibel” case saw McDonald’s sue two UK activists over a critical leaflet. A court backed some of their claims about pay and animal welfare, and a European court later ruled the UK had breached their rights."},
+"Starbucks":{m:"Starbucks runs coffee shops worldwide and also sells packaged coffee in shops. Its model combines company-run and licensed stores.",c:"In 2018 it closed over 8,000 US stores for racial-bias training after two Black men were arrested at a Philadelphia store."},
+"IKEA":{m:"IKEA designs low-cost, flat-pack furniture and home goods sold in large stores. Customers carry and assemble much of it themselves.",c:"A 2012 report commissioned by IKEA found that East German political prisoners were used to make its furniture in the 1980s. IKEA apologised."},
+"Ford":{m:"Ford makes cars, trucks and SUVs, including the F-150 pickup and electric models like the Mustang Mach-E. It also runs a finance arm.",c:"In the 1970s the Ford Pinto’s fuel tank was linked to fatal fires. Ford recalled the car in 1978 and was acquitted in a 1980 criminal trial, but paid damages in civil cases."},
+"Honda":{m:"Honda makes cars, motorcycles, engines and power equipment, and is one of the world’s biggest motorcycle makers. It also builds HondaJet aircraft.",c:"Honda used Takata airbags, which could rupture and kill. In 2015 US regulators fined Honda $70 million for failing to report deaths and injuries."},
+"Stellantis":{m:"Stellantis owns Jeep, Ram, Peugeot, Fiat, Citroën and Chrysler. It was formed in 2021 by the merger of Fiat Chrysler and PSA.",c:"Its predecessor Fiat Chrysler agreed in 2019 to pay about $800 million over diesel Jeep and Ram vehicles that exceeded emissions limits."},
+"BYD":{m:"BYD makes electric and hybrid cars and also batteries, buses and electronics. It is one of the world’s largest sellers of electric vehicles.",c:"In 2024 Brazilian authorities said workers building BYD’s factory in Bahia were held in conditions like slavery. BYD ended its contract with the contractor and said it was cooperating."},
+"Standard Chartered":{m:"Standard Chartered is a London-headquartered bank that earns most of its money in Asia, Africa and the Middle East. It focuses on trade finance and wealth management.",c:"In 2019 it paid about $1.1 billion to US and UK authorities for violating sanctions on countries such as Iran."},
+"Abbott Laboratories":{m:"Abbott makes medical devices such as glucose monitors, diagnostic tests, baby formula and medicines. Its FreeStyle Libre sensor is widely used by people with diabetes.",c:"In 2022 Abbott recalled formula from a Michigan plant after infant illnesses, causing a US shortage. Abbott said its formula was not conclusively linked to the illnesses."},
+"UnitedHealth Group":{m:"UnitedHealth sells health insurance through UnitedHealthcare and provides care and data services through Optum. It is one of the largest healthcare companies in the US.",c:"A 2024 ransomware attack on its Change Healthcare unit exposed data of well over 100 million people and disrupted payments to hospitals and clinics across the US."},
+"CVS Health":{m:"CVS Health runs pharmacies and clinics, and sells health insurance through Aetna. It also manages drug benefits for employers and insurers.",c:"In 2022 CVS agreed to pay about $5 billion to settle US lawsuits that said its pharmacies helped fuel the opioid crisis."},
+"Eli Lilly":{m:"Eli Lilly develops medicines for diabetes, obesity, cancer and immune diseases. It makes insulin and the weight-loss and diabetes drugs Mounjaro and Zepbound.",c:"US insulin prices rose sharply for years, drawing Congressional scrutiny. In 2023 Lilly, Novo Nordisk and Sanofi announced price cuts."},
+"Kraft Heinz":{m:"Kraft Heinz makes packaged foods such as Heinz ketchup, Kraft cheese and Oscar Mayer. It was created by a 2015 merger of Kraft and Heinz.",c:"In 2019 it wrote down $15.4 billion and disclosed an accounting probe. In 2021 it paid $62 million to settle US charges over its accounting."},
+"Baidu":{m:"Baidu runs China’s leading search engine and is investing heavily in AI and self-driving taxis. It earns mostly from online advertising.",c:"In 2016 a student named Wei Zexi died after unproven cancer treatment he found via Baidu search ads. Chinese regulators ordered Baidu to change how it ran paid listings."},
+"The Home Depot":{m:"Home Depot is the largest home improvement retailer in the US. It sells tools, building materials and appliances to homeowners and contractors.",c:"A 2014 data breach exposed about 56 million payment cards. In 2020 Home Depot paid $17.5 million to settle with US states."},
+"Morgan Stanley":{m:"Morgan Stanley is a US investment bank and wealth manager. It advises on deals, trades in markets and manages money for wealthy clients.",c:"In 2016 it agreed to pay $2.6 billion to settle US claims over mortgage securities sold before the 2008 financial crisis."},
+"Deere & Company":{m:"Deere makes John Deere tractors, harvesters and construction machinery. Its machines are heavily software-driven, with GPS and data tools for farms.",c:"In 2025 the US FTC sued Deere, alleging it unlawfully limits farmers’ ability to repair their own equipment. Deere disputes the claims."},
+"Visa":{m:"Visa runs a global payments network that connects banks, shops and cardholders. It does not lend money itself; banks issue the cards and Visa earns fees on transactions.",c:"In 2024 the US Justice Department sued Visa, alleging it illegally dominates debit card payments. Visa disputes the claims."},
+"AstraZeneca":{m:"AstraZeneca develops medicines for cancer, heart, kidney and respiratory conditions. It also developed a COVID-19 vaccine with Oxford University.",c:"In 2010 it paid $520 million to settle US claims that it illegally marketed its drug Seroquel for unapproved uses."},
+"Tata Consultancy Services":{m:"TCS builds, runs and modernises software systems for large companies and governments. It is one of the largest IT employers in India.",c:"In 2023 a US jury ordered TCS to pay about $210 million in a trade-secrets case brought by Computer Sciences Corporation. TCS denied wrongdoing and appealed."},
+"Oracle":{m:"Oracle sells database software, business applications and cloud infrastructure. Large companies use its databases to store and manage critical data.",c:"In 2022 Oracle paid $23 million to settle US charges that its units in Turkey, the UAE and India kept off-book funds that could be used for bribes."},
+"Cisco Systems":{m:"Cisco makes the routers, switches and security equipment that run corporate networks and the internet. It also sells collaboration tools such as Webex.",c:"In 2019 Cisco paid $8.6 million to settle US claims that it sold video surveillance software with known security flaws to government agencies."},
+"Panasonic":{m:"Panasonic makes home appliances, electric-vehicle batteries and electronic components. It is a major battery supplier to Tesla.",c:"In 2018 its subsidiary Panasonic Avionics paid about $280 million to settle US bribery and accounting charges tied to its in-flight entertainment business."},
+"NVIDIA":{m:"NVIDIA designs graphics processors (GPUs), which became the main chips for training and running AI. It also sells gaming cards, data-centre systems and the CUDA software platform.",c:"In 2022 NVIDIA paid $5.5 million to settle US charges that it failed to disclose how much of its gaming revenue came from crypto mining."},
+"IBM":{m:"IBM sells hybrid cloud, AI software, consulting and mainframe computers to large companies and governments. It no longer focuses on consumer PCs.",c:"In 2011 IBM paid $10 million to settle US charges that its units in China and South Korea bribed officials to win business."},
+"Adobe":{m:"Adobe makes creative and document software such as Photoshop, Illustrator, Premiere Pro and Acrobat. Most of its sales come from subscriptions.",c:"In 2024 the US Justice Department sued Adobe on behalf of the FTC, alleging it hid early-cancellation fees in its subscriptions. Adobe disputes the claims."},
+"HP Inc.":{m:"HP sells laptops, desktops, printers and ink. It split from Hewlett Packard Enterprise in 2015, which took the servers and business services.",c:"In 2006 HP admitted investigators it hired had used deception to obtain phone records of its own board members and journalists. Chair Patricia Dunn resigned and HP paid $14.5 million to California."},
+"Dell Technologies":{m:"Dell sells PCs, servers and storage systems to consumers, businesses and governments. It also sells data-centre software and services.",c:"In 2010 Dell paid $100 million to settle US charges that it misled investors about its profits and the payments it received from Intel."},
+"Netflix":{m:"Netflix is a streaming service that makes and licenses films, series and documentaries. It earns mainly from monthly subscriptions and now also sells ad-supported plans.",c:"In 2021 employees staged a walkout over Dave Chappelle’s comedy special that critics said was transphobic. Netflix defended its decision to keep it."},
+"Deloitte":{m:"Deloitte is one of the Big Four firms. It audits companies, advises on tax and deals, and does consulting for governments and businesses.",c:"In 2025 Deloitte partly refunded the Australian government for a A$440,000 report that contained errors, including references that did not exist. Deloitte had used AI tools in preparing it."},
+"Hitachi":{m:"Hitachi makes power grid equipment, trains, industrial systems and IT services. It has shifted from consumer electronics to infrastructure and digital businesses.",c:"In 2015 Hitachi paid $19 million to settle US charges that it improperly paid a firm linked to South Africa’s ruling party while winning power-plant contracts."},
+"Hyundai Motor Company":{m:"Hyundai makes cars and electric vehicles, and sells premium models under Genesis. It sits within the group that also owns Kia.",c:"Some Hyundai and Kia models lacked engine immobilisers and became easy to steal after a 2021 social-media trend. In 2023 the companies agreed to a $200 million class-action settlement."},
+"Mondelēz International":{m:"Mondelēz makes snacks such as Oreo, Cadbury chocolate, Toblerone and Ritz crackers. It was created in 2012 when Kraft Foods split.",c:"In 2024 the EU fined Mondelēz €337.5 million for restricting cross-border trade of its chocolate and biscuits between EU countries."},
+"Diageo":{m:"Diageo makes and sells spirits and beer, including Johnnie Walker, Smirnoff, Captain Morgan and Guinness. It owns United Spirits, the biggest spirits company in India.",c:"In 2015 Diageo said about $200 million had been improperly moved out of its Indian unit, United Spirits, to firms linked to Vijay Mallya’s group. Mallya resigned in 2016 and India’s regulator later barred him; he denies wrongdoing."},
+"Anheuser-Busch InBev":{m:"AB InBev is the world’s largest brewer, behind Budweiser, Bud Light, Stella Artois, Corona (outside the US) and Michelob Ultra. It sells in most countries.",c:"In 2023 Bud Light faced a boycott after it sent a can to a transgender influencer. Sales fell sharply and it lost its position as the top-selling US beer."},
+"Gillette":{m:"Gillette makes razors, blades and shaving products. It is owned by Procter & Gamble and sold in most countries.",c:"A 2019 Gillette advert about toxic masculinity split public opinion. That year P&G wrote down about $8 billion on the brand, which it blamed on competition and currency effects."},
+"Mastercard":{m:"Mastercard runs a global payments network that links banks, shops and cardholders. It earns fees on transactions and does not lend money itself.",c:"In 2019 the EU fined Mastercard about €570 million for preventing shops from using cheaper card payment options from other EU countries."},
+"Berkshire Hathaway":{m:"Berkshire Hathaway is a holding company run by Warren Buffett for decades. It owns insurers such as GEICO, the BNSF railway, utilities, and stakes in companies such as Apple and Coca-Cola.",c:"In 1991 Salomon Brothers, in which Berkshire held a large stake, was caught submitting false bids in US Treasury auctions. Buffett stepped in as interim chairman."},
+"Roche":{m:"Roche develops cancer medicines and diagnostic tests. It is one of the largest cancer-drug makers and a leader in laboratory diagnostics.",c:"Researchers questioned how well Roche’s flu drug Tamiflu worked and criticised delays in releasing full trial data, after governments spent billions stockpiling it. Roche says the drug is effective."},
+"AbbVie":{m:"AbbVie develops immunology and cancer medicines and sells Botox. Its best-known drug, Humira, treats autoimmune diseases like arthritis.",c:"AbbVie protected Humira with a large set of patents, which critics said delayed cheaper copies in the US. A US appeals court ruled in 2022 that its approach was lawful."},
+"Medtronic":{m:"Medtronic makes medical devices, such as pacemakers, insulin pumps, stents and spinal implants. It sells to hospitals in most countries.",c:"A 2012 US Senate report said Medtronic had influenced research on its Infuse spinal product, including how side effects were presented in medical journals."},
+"Tech Mahindra":{m:"Tech Mahindra provides IT, telecom and engineering services, and belongs to the Mahindra Group. It serves mostly communications and technology companies.",c:"In 2009 it bought a controlling stake in Satyam Computer Services after Satyam’s founder admitted to inflating its accounts by around ₹7,000 crore, in one of India’s biggest corporate frauds."},
+"Hindustan Unilever (HUL)":{m:"HUL is India’s largest consumer goods company, selling soaps, detergents, tea, ice cream and personal care products. Its brands include Lux, Surf Excel and Dove.",c:"Its Fair & Lovely cream was criticised for promoting skin lightening. In 2020 HUL dropped “Fair” from the name and renamed it Glow & Lovely."},
+"Tencent":{m:"Tencent runs WeChat, a huge games business and cloud and payment services. It also holds stakes in many companies around the world.",c:"In 2025 the US Defense Department added Tencent to a list of Chinese military-linked companies. Tencent denies it is a military company."},
+"ICBC":{m:"ICBC is the world’s largest bank by assets. It lends to Chinese households, businesses and state projects, and has expanded abroad.",c:"In 2023 a ransomware attack on ICBC’s US arm disrupted trading in the US Treasury market and forced the bank to use workarounds."},
+"Mars":{m:"Mars makes confectionery such as M&M’s, Snickers and Twix, and owns pet care brands like Pedigree and Royal Canin. It is a family-owned company.",c:"Mars and other chocolate makers pledged repeatedly to end child labour in their cocoa supply chains, but a 2020 US study found over a million children still worked in cocoa farming in West Africa."},
+"LVMH":{m:"LVMH is the world’s largest luxury group, owning Louis Vuitton, Dior, Moët & Chandon, Hennessy, Sephora and Tiffany.",c:"In 2020 LVMH tried to back out of its $16.2 billion takeover of Tiffany, citing COVID-19, which led to a lawsuit. It then closed the deal at a lower price of $15.8 billion."},
+"Tata Motors":{m:"Tata Motors makes cars, SUVs, trucks and electric vehicles in India, and owns Jaguar Land Rover. Its Nexon and Harrier SUVs are among India’s best sellers.",c:"A 2025 cyberattack halted production at Jaguar Land Rover for weeks, and the UK government backed a £1.5 billion loan guarantee to help its suppliers."},
+"Larsen & Toubro (L&T)":{m:"L&T builds roads, bridges, metros, power plants and defence equipment, and also runs IT services and financial arms. It is one of India’s largest engineering companies.",c:"In 2025 chairman S.N. Subrahmanyan said employees should work 90 hours a week, including Sundays. The remark drew widespread criticism and the company later clarified it."},
+"Salesforce":{m:"Salesforce sells cloud-based customer relationship management (CRM) software, and tools for sales, marketing and service. It also owns Slack and Tableau.",c:"In 2018 hundreds of Salesforce employees urged the company to end its work with US Customs and Border Protection during the family-separation policy. Salesforce kept the contract and said its tools were not used for that policy."},
+"Danone":{m:"Danone makes yoghurt, bottled water, plant-based foods and infant nutrition. Its brands include Activia, Evian, Alpro and Aptamil.",c:"In 2013 Danone recalled infant formula in several Asian markets after ingredient supplier Fonterra warned of possible botulism bacteria. The alarm later proved false."},
+"Colgate-Palmolive":{m:"Colgate-Palmolive makes toothpaste, soap and oral-care products, and owns Hill’s pet nutrition. It sells in over 200 countries.",c:"The germ-killing chemical triclosan in some Colgate products drew health and environmental concerns. US regulators banned it from hand soaps in 2016, and Colgate later dropped it from Colgate Total."},
+"Kellogg Company":{m:"Kellogg made breakfast cereals and snacks such as Corn Flakes and Pringles. In 2023 it split into Kellanova for snacks and WK Kellogg Co for cereals.",c:"In 2010 Kellogg settled with the US FTC over claims that Rice Krispies helped support children’s immunity, which regulators said were not supported by evidence."},
+"TSMC":{m:"TSMC is the world’s largest contract chipmaker. It makes the advanced chips designed by companies like Apple, NVIDIA and AMD, but does not sell chips under its own brand.",c:"Reports in 2024–25 said a TSMC-made chip ended up in a Huawei AI processor despite US export limits, prompting a reported US investigation. TSMC said it complies with the law and stopped shipments to the intermediary."},
+"Broadcom":{m:"Broadcom makes chips for networking, wireless and data centres, and owns enterprise software firms such as VMware. It is one of the biggest chip companies in the world.",c:"After buying VMware for about $69 billion in 2023, Broadcom changed licensing and raised prices, which many customers criticised. AT&T sued it in 2024, and the dispute was later settled."},
+"ASML":{m:"ASML makes the lithography machines chipmakers use to print circuits on silicon. It is the only company that makes the extreme-ultraviolet machines needed for the most advanced chips.",c:"In 2019 a US jury ordered XTAL, a firm founded by former ASML staff, to pay ASML $845 million over stolen trade secrets. ASML has also been caught in Dutch and US export limits on sales to China."},
+"AMD":{m:"AMD designs processors and graphics chips for PCs, game consoles and data centres. Its Ryzen and EPYC chips compete directly with Intel’s.",c:"In 2019 AMD agreed to pay $12.1 million to settle a class action claiming its “8-core” Bulldozer chips shared parts between cores and were misleadingly marketed."},
+"Accenture":{m:"Accenture provides consulting, technology and outsourcing services to large companies and governments. It is one of the world’s biggest consulting firms.",c:"Accenture moved its legal home from the US to Bermuda in 2001 and to Ireland in 2009. US lawmakers criticised this as a way to lower taxes while still winning US government contracts. Accenture says it follows the law."},
+"Capgemini":{m:"Capgemini provides consulting, cloud, software engineering and outsourcing services to companies and governments. It is one of Europe’s largest IT services firms.",c:"In January 2026 it emerged that its US unit, Capgemini Government Solutions, held a contract with US immigration enforcement (ICE) to help locate people. After protests and criticism from unions and politicians, Capgemini said it would sell that unit."},
+"Wipro":{m:"Wipro provides IT services, consulting and business outsourcing to companies around the world. It also has a consumer products business.",c:"In 2022 Wipro fired about 300 employees for secretly working for competitors. Chairman Rishad Premji called moonlighting “cheating”, which sparked a national debate in India."},
+"HCLTech":{m:"HCLTech provides IT, engineering and cloud services to large companies. It is one of India’s biggest IT services firms.",c:"In 2015 reports said Disney laid off about 250 US IT workers, some of whom trained replacements supplied through outsourcing firms including HCL, drawing scrutiny of US work-visa use. HCL said it followed the law."},
+"Mphasis":{m:"Mphasis provides IT, cloud and application services, mainly to banks and insurers. It is majority-owned by the investment firm Blackstone.",c:"In 2005 staff at its Pune call centre were arrested for stealing about $350,000 from US Citibank customers by misusing account details."},
+"Schneider Electric":{m:"Schneider Electric makes electrical equipment, automation systems and software that manage power in buildings, factories and data centres.",c:"In 2017 attackers used the Triton malware against Schneider’s Triconex safety systems at a Saudi petrochemical plant, a rare attack on equipment meant to prevent industrial accidents."},
+"Caterpillar":{m:"Caterpillar makes construction and mining machinery, engines and turbines. Its yellow bulldozers, excavators and trucks are used on building sites around the world.",c:"A 2014 US Senate investigation found Caterpillar routed billions of dollars in profit through a Swiss unit, cutting its US taxes by about $2.4 billion. Caterpillar said it followed the law; federal agents searched its offices in 2017."},
+"Michelin":{m:"Michelin makes tyres for cars, trucks, aircraft and bikes, and publishes the Michelin Guide, which awards stars to restaurants.",c:"In 2024 EU investigators raided Michelin and other tyre makers over suspected price coordination. Michelin said it is cooperating, and no wrongdoing has been established."},
+"BASF":{m:"BASF is one of the world’s largest chemical makers. It supplies chemicals, plastics, coatings and crop-protection products to many industries.",c:"In 2020 a US jury ordered BASF and Bayer to pay $265 million to a Missouri peach farmer whose orchards were damaged by drifting dicamba herbicide. A judge later reduced the punitive award."},
+"Procter & Gamble (P&G)":{m:"P&G makes everyday household and personal care products. Its brands include Tide, Pampers, Gillette, Ariel and Head & Shoulders.",c:"In 2011 the EU fined P&G €211 million, and Unilever €104 million, for fixing prices of laundry detergent in a cartel across several European countries."},
+"L’Oréal":{m:"L’Oréal is the world’s largest beauty company. Its brands include L’Oréal Paris, Garnier, Maybelline, Lancôme and Kiehl’s.",c:"In 2010 secretly recorded tapes of heiress Liliane Bettencourt, its biggest shareholder, led to investigations into tax evasion and political donations. A society photographer was convicted in 2015 of exploiting her; L’Oréal itself was not accused."},
+"Estée Lauder Companies":{m:"Estée Lauder owns many prestige beauty brands, including Estée Lauder, Clinique, MAC and Jo Malone. It sells skincare, makeup and fragrance worldwide.",c:"Until China ended mandatory animal testing for most imported cosmetics in 2021, Estée Lauder was criticised by animal-rights groups for selling there. It says it does not test on animals except where required by law."},
+"Kimberly-Clark":{m:"Kimberly-Clark makes tissues, nappies and hygiene products. Its brands include Kleenex, Huggies, Cottonelle and Kotex.",c:"In the 2000s Greenpeace campaigned against Kimberly-Clark for using pulp from old-growth Canadian forests. In 2009 it agreed to buy more certified and recycled fibre."},
+"General Mills":{m:"General Mills makes packaged foods and cereals such as Cheerios, Pillsbury, Häagen-Dazs and Nature Valley.",c:"In 2016 it recalled about 10 million pounds of flour after an E. coli outbreak that sickened 63 people in the US."},
+"Whirlpool":{m:"Whirlpool makes washing machines, fridges, ovens and other home appliances. Its brands include Whirlpool, KitchenAid, Maytag and Indesit.",c:"Whirlpool was criticised for a slow response to fire risks in millions of Hotpoint and Indesit tumble dryers sold in the UK. A repair and recall programme followed in 2016."},
+"Costco":{m:"Costco runs membership-only warehouse stores that sell goods in bulk at low prices. It also sells its own Kirkland Signature brand, and earns much of its profit from membership fees.",c:"Tiffany & Co. sued Costco in 2004 over diamond rings sold with signs saying “Tiffany”. A US court ordered Costco to pay about $21 million in 2017, and the two later reached a settlement after years of appeals."},
+"China Construction Bank":{m:"China Construction Bank is one of China’s four biggest state-owned banks. It lends heavily for housing, infrastructure and business, and is among the largest banks in the world by assets.",c:"Its former chairman Zhang Enzhao resigned in 2005 and was sentenced to 15 years in prison in 2006 for taking bribes, just before the bank’s stock-market listing."},
+"Agricultural Bank of China":{m:"Agricultural Bank of China is one of China’s four biggest state-owned banks. It has a vast branch network, especially in rural areas, and lends to farmers and agriculture.",c:"In 2016 New York’s financial regulator fined it $215 million for failing to maintain effective anti-money-laundering controls at its New York branch."},
+"American Express":{m:"American Express issues charge and credit cards and also runs its own payments network. It targets higher-spending customers and earns fees from shops as well as interest.",c:"In 2012 the US consumer finance regulator ordered American Express to refund about $85 million to customers over deceptive card marketing and billing practices."},
+"AXA":{m:"AXA is one of the world’s largest insurance groups. It sells property, health and life insurance and manages investments, mostly in Europe.",c:"In 2018 New York’s financial regulator fined AXA’s US life insurance unit $20 million, then the largest fine ever against an insurer in the state, over how it disclosed changes to a variable annuity investment strategy."},
+"Novo Nordisk":{m:"Novo Nordisk is a Danish drugmaker focused on diabetes and obesity. It makes insulin and the Ozempic and Wegovy drugs, and is one of Europe’s most valuable companies.",c:"In 2024 its CEO was questioned by a US Senate committee over why Ozempic and Wegovy cost far more in the US than in other countries. Novo said it was working to improve access."},
+"Thermo Fisher Scientific":{m:"Thermo Fisher sells lab equipment, chemicals, testing kits and services to research labs, hospitals and drugmakers. It was a major supplier of COVID-19 tests.",c:"In 2021 the family of Henrietta Lacks sued Thermo Fisher, saying it profited from HeLa cells taken from her without her consent. The case was settled in 2023."}
+};
 const $=id=>document.getElementById(id);
 let sector="all",open=null;
-const chev='<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 5l5 5 5-5"/></svg>';
-function esc(t){return t.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))}
-function chips(){$("chips").innerHTML=SECTORS.map(([k,l])=>`<button class="chip" data-k="${k}" aria-pressed="${k===sector}">${esc(l)}</button>`).join("")}
+const chev='<svg width="16" height="16" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 5l5 5 5-5"/></svg>';
+function esc(t){return String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function mono(n){const w=n.replace(/[^A-Za-z0-9 ]/g,"").split(" ").filter(Boolean);return esc(w.length>1&&w[0].length>1&&n.length<18?(w[0][0]+w[1][0]):w[0].slice(0,1)).toUpperCase()}
+function chips(){$("chips").innerHTML=SECTORS.map(([k,l])=>`<button class="chip" data-k="${k}" aria-pressed="${k===sector}">${k==="all"?"":`<i style="--c:${COLORS[k]}"></i>`}${esc(l)}</button>`).join("")}
+function hero(){
+  const counts={};D.forEach(c=>counts[c.s]=(counts[c.s]||0)+1);
+  $("mix").innerHTML=SECTORS.filter(s=>counts[s[0]]).map(([k,l])=>`<span style="--m:${COLORS[k]};flex:${counts[k]}" title="${esc(l)}: ${counts[k]}"></span>`).join("");
+  const dated=D.filter(c=>c.y).sort((a,b)=>a.y-b.y)[0];
+  $("s1").textContent=D.length;$("s2").textContent=Object.keys(counts).length;
+  if(dated){$("s3").textContent=dated.y;$("s3l").textContent="Oldest here: "+dated.n}
+}
 function render(){
   const q=$("q").value.trim().toLowerCase();
   const rows=D.filter(c=>(sector==="all"||c.s===sector)&&(!q||[c.n,c.hq,c.c,c.k,c.a,c.d,...(c.w||[])].join(" ").toLowerCase().includes(q))).sort((a,b)=>a.n.localeCompare(b.n));
   $("count").textContent=rows.length+(rows.length===1?" company":" companies");
   if(!rows.length){$("list").innerHTML='<li class="empty">No company matches that search. Clear the search or pick another sector.</li>';return}
   $("list").innerHTML=rows.map(c=>{
-    const id="p-"+c.n.replace(/\W+/g,"");const isOpen=open===c.n;
+    const id="p-"+c.n.replace(/\W+/g,"");const isOpen=open===c.n;const x=X[c.n]||{};
+    const sec=SECTORS.find(s=>s[0]===c.s)[1];
+    const fact=(l,v)=>`<div><small>${l}</small><b>${esc(v)}</b></div>`;
     return `<li class="item" style="--c:${COLORS[c.s]}">
       <button class="row" aria-expanded="${isOpen}" aria-controls="${id}" data-n="${esc(c.n)}">
-        <span class="bar"></span>
-        <span><span class="name">${esc(c.n)}</span><span class="meta">${esc(c.hq||c.c)} · ${esc(SECTORS.find(s=>s[0]===c.s)[1])}</span></span>
-        <span class="yr">${c.y?"Since "+c.y:""}${chev}</span>
+        <span class="tile" aria-hidden="true">${mono(c.n)}</span>
+        <span><span class="name">${esc(c.n)}</span><span class="meta"><span>${esc(c.hq||c.c)}</span><span class="tag">${esc(sec)}</span></span></span>
+        <span class="yr">${c.y?`<span><small>Founded</small><b>${c.y}</b></span>`:""}${chev}</span>
       </button>
       <div class="panel" id="${id}" ${isOpen?"":"hidden"}>
-        ${c.d?`<p>${esc(c.d)}</p><div class="facts"><span><b>Home country</b> ${esc(c.c)}</span></div>`:`<p>${esc(c.a)}</p>
-        <div><h3>What it does</h3><ul>${c.w.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
-        <div class="facts"><span><b>Founded</b> ${c.y}</span><span><b>Headquarters</b> ${esc(c.hq)}</span><span><b>Known for</b> ${esc(c.k)}</span></div>`}
+        ${c.d?`<p>${esc(c.d)}</p><div class="facts">${fact("Home country",c.c)}</div>`:`<p>${esc(c.a)}</p>
+        <div><h3>What it does</h3><ul>${c.w.map(w=>`<li>${esc(w)}</li>`).join("")}</ul></div>
+        <div class="facts">${fact("Founded",c.y)}${fact("Headquarters",c.hq)}${fact("Known for",c.k)}</div>`}
+        ${x.m?`<p class="more">${esc(x.m)}</p>`:""}${x.c?`<div class="ctr"><h3>Major controversy</h3><p>${esc(x.c)}</p></div>`:""}
       </div></li>`}).join("");
 }
 $("chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;sector=b.dataset.k;chips();render()});
 $("list").addEventListener("click",e=>{const b=e.target.closest(".row");if(!b)return;open=open===b.dataset.n?null:b.dataset.n;render();const nb=document.querySelector('.row[data-n="'+CSS.escape(b.dataset.n)+'"]');if(nb)nb.focus()});
 $("q").addEventListener("input",render);
-chips();render();
+hero();chips();render();
+(function(){
+  const t0=performance.now(),calm=matchMedia("(prefers-reduced-motion:reduce)").matches,min=calm?500:2400;
+  let gone=false;
+  function finish(){
+    if(gone)return;gone=true;
+    const el=$("intro");el.classList.add("done");
+    document.documentElement.classList.remove("intro");
+    document.body.classList.add("ready");
+    setTimeout(()=>el.remove(),800);
+  }
+  function arrive(){setTimeout(finish,Math.max(0,min-(performance.now()-t0)))}
+  if(document.readyState==="complete")arrive();else addEventListener("load",arrive);
+  setTimeout(finish,6000);
+})();
+
 </script>
 </body>
 </html>
